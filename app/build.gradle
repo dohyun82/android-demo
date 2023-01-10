@@ -7,6 +7,10 @@ android {
     namespace 'kr.co.rkwkgo.androiddemo'
     compileSdk 32
 
+    buildFeatures {
+        viewBinding true
+    }
+
     defaultConfig {
         applicationId "kr.co.rkwkgo.androiddemo"
         minSdk 21
