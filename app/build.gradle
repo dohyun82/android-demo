@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.protobuf'
 }
 
 android {
@@ -51,4 +52,21 @@ dependencies {
 
     // Typed DataStore
     implementation "androidx.datastore:datastore:1.0.0"
+    // proto buffer : https://protobuf.dev/
+    implementation "com.google.protobuf:protobuf-javalite:3.19.4"
+}
+
+protobuf{
+    protoc{
+        artifact = "com.google.protobuf:protoc:3.19.4"
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option "lite"
+                }
+            }
+        }
+    }
 }

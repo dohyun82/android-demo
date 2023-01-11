@@ -31,4 +31,29 @@
         app:layout_constraintTop_toBottomOf="@id/btn_add_counter"
         />
 
+    <TextView
+        android:id="@+id/tv_proto_counter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/btn_subtract_counter"
+        />
+
+    <Button
+        android:id="@+id/btn_add_proto_counter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="더하기"
+        app:layout_constraintTop_toBottomOf="@id/tv_proto_counter"
+        />
+
+    <Button
+        android:id="@+id/btn_subtract_proto_counter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="빼기"
+        app:layout_constraintTop_toBottomOf="@id/btn_add_proto_counter"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
