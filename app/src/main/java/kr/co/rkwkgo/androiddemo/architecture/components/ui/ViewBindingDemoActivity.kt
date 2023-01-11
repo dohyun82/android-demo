@@ -1,4 +1,4 @@
-package kr.co.rkwkgo.androiddemo.architecture.components.ui.layer
+package kr.co.rkwkgo.androiddemo.architecture.components.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

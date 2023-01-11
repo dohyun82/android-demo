@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".architecture.components.ui.layer.ViewBindingDemoActivity">
+    tools:context=".architecture.components.ui.ViewBindingDemoActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
