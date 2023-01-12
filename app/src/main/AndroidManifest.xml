@@ -13,6 +13,20 @@
         android:theme="@style/Theme.AndroidDemo"
         tools:targetApi="31">
         <activity
+            android:name=".kotlin.CoroutineDemoActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".architecture.components.ui.LiveDataDemoActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".architecture.components.ui.ViewModelDemoActivity"
             android:exported="false">
             <meta-data

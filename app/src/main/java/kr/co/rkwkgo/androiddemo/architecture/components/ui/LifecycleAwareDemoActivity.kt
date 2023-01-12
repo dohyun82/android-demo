@@ -22,6 +22,14 @@ class LifecycleAwareDemoActivity : AppCompatActivity() {
 		binding.btnViewModel.setOnClickListener {
 			goViewModelDemoActivity()
 		}
+		binding.btnLiveData.setOnClickListener {
+			getLiveDataDemoActivity()
+		}
+	}
+
+	private fun getLiveDataDemoActivity() {
+		val intent = Intent(this, LiveDataDemoActivity::class.java)
+		startActivity(intent)
 	}
 
 	private fun goViewModelDemoActivity(){
