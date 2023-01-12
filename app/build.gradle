@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace 'kr.co.rkwkgo.androiddemo'
-    compileSdk 32
+    compileSdk 33
 
     buildFeatures {
         viewBinding true
@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId "kr.co.rkwkgo.androiddemo"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -54,6 +54,10 @@ dependencies {
     implementation "androidx.datastore:datastore:1.0.0"
     // proto buffer : https://protobuf.dev/
     implementation "com.google.protobuf:protobuf-javalite:3.19.4"
+
+    // by viewModels
+    implementation "androidx.activity:activity-ktx:1.6.1"
+    implementation "androidx.fragment:fragment-ktx:1.5.5"
 }
 
 protobuf{
