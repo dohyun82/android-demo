@@ -22,4 +22,12 @@
         app:layout_constraintTop_toBottomOf="@id/btn_view_binding"
         />
 
+    <Button
+        android:id="@+id/btn_lifecycle_aware"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lifecycle-Aware"
+        app:layout_constraintTop_toBottomOf="@id/btn_data_store"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

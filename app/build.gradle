@@ -54,6 +54,10 @@ dependencies {
     implementation "androidx.datastore:datastore:1.0.0"
     // proto buffer : https://protobuf.dev/
     implementation "com.google.protobuf:protobuf-javalite:3.19.4"
+
+    // by viewModels
+    implementation "androidx.activity:activity-ktx:1.6.1"
+    implementation "androidx.fragment:fragment-ktx:1.5.5"
 }
 
 protobuf{
