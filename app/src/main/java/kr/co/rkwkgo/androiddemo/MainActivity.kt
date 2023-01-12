@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kr.co.rkwkgo.androiddemo.architecture.components.data.DataStoreDemoActivity
+import kr.co.rkwkgo.androiddemo.architecture.components.ui.LifecycleAwareDemoActivity
 import kr.co.rkwkgo.androiddemo.architecture.components.ui.ViewBindingDemoActivity
 import kr.co.rkwkgo.androiddemo.databinding.ActivityMainBinding
 
@@ -21,6 +22,9 @@ class MainActivity : AppCompatActivity() {
 		binding.btnDataStore.setOnClickListener {
 			goDataStoreDemoActivity()
 		}
+		binding.btnLifecycleAware.setOnClickListener {
+			goLifecycleAwareDemoActivity()
+		}
 	}
 
 	private fun goViewBindingDemoActivity(){
@@ -30,6 +34,11 @@ class MainActivity : AppCompatActivity() {
 
 	private fun goDataStoreDemoActivity(){
 		val intent = Intent(this, DataStoreDemoActivity::class.java)
+		startActivity(intent)
+	}
+
+	private fun goLifecycleAwareDemoActivity(){
+		val intent = Intent(this, LifecycleAwareDemoActivity::class.java)
 		startActivity(intent)
 	}
 
