@@ -2,6 +2,7 @@ package kr.co.rkwkgo.androiddemo
 
 import org.junit.Assert
 import org.junit.Test
+import java.util.*
 import kotlin.math.*
 
 /**
@@ -9,6 +10,23 @@ import kotlin.math.*
  * Level 0
  */
 class CodingTestLevel0 {
+
+	/**
+	 * 두 수의 합
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/120802
+	 */
+	@Test
+	fun sumOfTwoNumbers(){
+		val num1 = 2
+		val num2 = 3
+		val result = sumOfTwoNumbers(num1, num2)
+		println(result)
+		Assert.assertEquals(result, 5)
+	}
+
+	private fun sumOfTwoNumbers(num1: Int, num2: Int): Int {
+		return num1 + num2
+	}
 
 	/**
 	 * 두수의 차
@@ -25,40 +43,6 @@ class CodingTestLevel0 {
 
 	private fun differenceOfTwoNumber(num1: Int, num2: Int): Int {
 		return num1-num2
-	}
-
-	/**
-	 * 나머지 구하기
-	 * https://school.programmers.co.kr/learn/courses/30/lessons/120810
-	 */
-	@Test
-	fun findTheRest(){
-		val num1 = 3
-		val num2 = 2
-		val result = findTheRest(num1, num2)
-		println(result)
-		Assert.assertEquals(result, 1)
-	}
-
-	private fun findTheRest(num1: Int, num2: Int): Int {
-		return num1%num2
-	}
-
-	/**
-	 * 몫 구하기
-	 * https://school.programmers.co.kr/learn/courses/30/lessons/120805
-	 */
-	@Test
-	fun findTheShare(){
-		val num1 = 10
-		val num2 = 5
-		val result = findTheShare(num1, num2)
-		println(result)
-		Assert.assertEquals(result, 2)
-	}
-
-	private fun findTheShare(num1: Int, num2: Int): Int {
-		return num1/num2
 	}
 
 	/**
@@ -79,6 +63,40 @@ class CodingTestLevel0 {
 	}
 
 	/**
+	 * 몫 구하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/120805
+	 */
+	@Test
+	fun findTheShare(){
+		val num1 = 10
+		val num2 = 5
+		val result = findTheShare(num1, num2)
+		println(result)
+		Assert.assertEquals(result, 2)
+	}
+
+	private fun findTheShare(num1: Int, num2: Int): Int {
+		return num1/num2
+	}
+
+	/**
+	 * 두 수의 나눗셈
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/120806
+	 */
+	@Test
+	fun divisionOfTwoNumbers(){
+		val num1 = 3
+		val num2 = 2
+		val result = divisionOfTwoNumbers(num1, num2)
+		println(result)
+		Assert.assertEquals(result, 1500)
+	}
+
+	private fun divisionOfTwoNumbers(num1: Int, num2: Int): Int {
+		return num1 * 1000 / num2
+	}
+
+	/**
 	 * 숫자 비교하기
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/120807
 	 */
@@ -96,21 +114,58 @@ class CodingTestLevel0 {
 	}
 
 	/**
-	 * 두 수의 합
-	 * https://school.programmers.co.kr/learn/courses/30/lessons/120802
+	 * 분수의 덧셈
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/120808
 	 */
 	@Test
-	fun sumOfTwoNumbers(){
-		val num1 = 2
-		val num2 = 3
-		val result = sumOfTwoNumbers(num1, num2)
-		println(result)
-		Assert.assertEquals(result, 5)
+	fun additionOfFractions(){
+		val numer1 = 1
+		val denom1 = 2
+		val numer2 = 3
+		val denom2 = 4
+		val result = additionOfFractions(numer1, denom1, numer2, denom2)
+		println(result.toList())
+		Assert.assertEquals(result.contentEquals(intArrayOf(5,4)), true)
 	}
 
-	private fun sumOfTwoNumbers(num1: Int, num2: Int): Int {
-		return num1 + num2
+	private fun additionOfFractions(numer1: Int, denom1: Int, numer2: Int, denom2: Int): IntArray {
+		val lcm = lcm(denom1, denom2)
+		val denom3 = numer1 * (lcm / denom1) + numer2 * (lcm / denom2)
+		val gcd = gcd(denom3, lcm)
+		return intArrayOf(denom3 / gcd, lcm/gcd)
 	}
+
+	private tailrec fun gcd(num1: Int, num2: Int) : Int = if (num2 == 0) num1 else gcd(num2, num1 % num2)
+
+	private fun lcm(num1: Int, num2: Int): Int = num1 * num2 / gcd(num1, num2)
+
+
+
+
+	/**
+	 * 나머지 구하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/120810
+	 */
+	@Test
+	fun findTheRest(){
+		val num1 = 3
+		val num2 = 2
+		val result = findTheRest(num1, num2)
+		println(result)
+		Assert.assertEquals(result, 1)
+	}
+
+	private fun findTheRest(num1: Int, num2: Int): Int {
+		return num1%num2
+	}
+
+
+
+
+
+
+
+
 
 	/**
 	 * 나이 출력
@@ -148,23 +203,6 @@ class CodingTestLevel0 {
 			180 -> 4
 			else -> 0
 		}
-	}
-
-	/**
-	 * 두 수의 나눗셈
-	 * https://school.programmers.co.kr/learn/courses/30/lessons/120806
-	 */
-	@Test
-	fun divisionOfTwoNumbers(){
-		val num1 = 3
-		val num2 = 2
-		val result = divisionOfTwoNumbers(num1, num2)
-		println(result)
-		Assert.assertEquals(result, 1500)
-	}
-
-	private fun divisionOfTwoNumbers(num1: Int, num2: Int): Int {
-		return num1 * 1000 / num2
 	}
 
 	/**
@@ -910,6 +948,27 @@ class CodingTestLevel0 {
 	private fun ageOfExoplanets(age: Int): String {
 		return age.toString().toCharArray().joinToString("") {
 			(it + 49).toString()
+		}
+	}
+
+	/**
+	 * 인덱스 바꾸기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/120895
+	 */
+	@Test
+	fun changeIndex(){
+		val my_string = "hello"
+		val num1 = 1
+		val num2 = 2
+		val result = changeIndex(my_string, num1, num2)
+		println(result)
+		Assert.assertEquals("hlelo", result)
+	}
+
+	private fun changeIndex(my_string: String, num1: Int, num2: Int): String {
+		return my_string.toList().let {
+			Collections.swap(it, num1, num2)
+			it.joinToString("")
 		}
 	}
 
