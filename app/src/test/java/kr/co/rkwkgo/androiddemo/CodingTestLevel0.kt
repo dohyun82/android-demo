@@ -139,8 +139,21 @@ class CodingTestLevel0 {
 
 	private fun lcm(num1: Int, num2: Int): Int = num1 * num2 / gcd(num1, num2)
 
+	/**
+	 * 배열 두배 만들기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/120809
+	 */
+	@Test
+	fun makeArrayDouble(){
+		val numbers = intArrayOf(1, 2, 3, 4, 5)
+		val result = makeArrayDouble(numbers)
+		println(result.toList())
+		Assert.assertEquals(intArrayOf(2, 4, 6, 8, 10).contentEquals(result), true)
+	}
 
-
+	private fun makeArrayDouble(numbers: IntArray): IntArray {
+		return numbers.map { it*2 }.toIntArray()
+	}
 
 	/**
 	 * 나머지 구하기
@@ -159,11 +172,37 @@ class CodingTestLevel0 {
 		return num1%num2
 	}
 
+	/**
+	 * 중앙값 구하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/120811
+	 */
+	@Test
+	fun getMiddleNumber(){
+		val array = intArrayOf(1, 2, 7, 10, 11)
+		val result = getMiddleNumber(array)
+		println(result)
+		Assert.assertEquals(result, 7)
+	}
 
+	private fun getMiddleNumber(array: IntArray): Int {
+		return array.sorted()[array.size/2]
+	}
 
+	/**
+	 * 최빈값 구하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/120812
+	 */
+	@Test
+	fun findingTheMode(){
+		val array = intArrayOf(1, 1, 2, 2)
+		val result = findingTheMode(array)
+		println(result)
+		Assert.assertEquals(-1, result)
+	}
 
-
-
+	private fun findingTheMode(array: IntArray): Int {
+		return array.toList().groupingBy { it }.eachCount().maxByOrNull { it.value }?.key ?: -1
+	}
 
 
 
@@ -334,22 +373,6 @@ class CodingTestLevel0 {
 
 	private fun evenOddNumber(num_list: IntArray): IntArray {
 		return intArrayOf(num_list.count{it%2==0}, num_list.count{it%2!=0})
-	}
-
-	/**
-	 * 배열 두배 만들기
-	 * https://school.programmers.co.kr/learn/courses/30/lessons/120809
-	 */
-	@Test
-	fun makeArrayDouble(){
-		val numbers = intArrayOf(1, 2, 3, 4, 5)
-		val result = makeArrayDouble(numbers)
-		println(result.toList())
-		Assert.assertEquals(intArrayOf(2, 4, 6, 8, 10).contentEquals(result), true)
-	}
-
-	private fun makeArrayDouble(numbers: IntArray): IntArray {
-		return numbers.map { it*2 }.toIntArray()
 	}
 
 	/**
@@ -534,22 +557,6 @@ class CodingTestLevel0 {
 
 	private fun iDoNotLikeEvenNumber(n: Int): IntArray {
 		return (0..n).filter { it%2!=0 }.toIntArray()
-	}
-
-	/**
-	 * 중앙값 구하기
-	 * https://school.programmers.co.kr/learn/courses/30/lessons/120811
-	 */
-	@Test
-	fun getMiddleNumber(){
-		val array = intArrayOf(1, 2, 7, 10, 11)
-		val result = getMiddleNumber(array)
-		println(result)
-		Assert.assertEquals(result, 7)
-	}
-
-	private fun getMiddleNumber(array: IntArray): Int {
-		return array.sorted()[array.size/2]
 	}
 
 	/**
@@ -831,7 +838,7 @@ class CodingTestLevel0 {
 	}
 
 	private fun findMaxNumber(array: IntArray): IntArray {
-		return array.max().let {
+		return array.maxOf{ it }.let {
 			intArrayOf(it, array.indexOf(it))
 		}
 	}
