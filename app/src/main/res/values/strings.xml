@@ -2,4 +2,5 @@
     <string name="app_name">AndroidDemo</string>
     <string name="title_activity_compose">ComposeActivity</string>
     <string name="title_activity_compose_demo2">ComposeDemo2Activity</string>
+    <string name="title_activity_compose_demo3">ComposeDemo3Activity</string>
 </resources>
