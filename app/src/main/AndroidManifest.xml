@@ -15,7 +15,12 @@
         android:theme="@style/Theme.AndroidDemo"
         tools:targetApi="31">
         <activity
-            android:name=".BoxDemoActivity"
+            android:name=".compose.BoxWithConstraintDemoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_box_with_constraint_demo"
+            android:theme="@style/Theme.AndroidDemo" />
+        <activity
+            android:name=".compose.BoxDemoActivity"
             android:exported="false"
             android:label="@string/title_activity_box_demo"
             android:theme="@style/Theme.AndroidDemo" />

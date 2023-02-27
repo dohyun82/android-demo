@@ -8,4 +8,5 @@
     <string name="title_activity_row_demo">RowDemoActivity</string>
     <string name="title_activity_column_demo">ColumnDemoActivity</string>
     <string name="title_activity_box_demo">BoxDemoActivity</string>
+    <string name="title_activity_box_with_constraint_demo">BoxWithConstraintDemoActivity</string>
 </resources>
