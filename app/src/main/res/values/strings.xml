@@ -5,4 +5,5 @@
     <string name="title_activity_compose_demo2">ComposeDemo2Activity</string>
     <string name="title_activity_compose_demo3">ComposeDemo3Activity</string>
     <string name="title_activity_compose_lazy_column">ComposeLazyColumnActivity</string>
+    <string name="title_activity_row_demo">RowDemoActivity</string>
 </resources>
