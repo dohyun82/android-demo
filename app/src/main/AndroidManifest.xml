@@ -15,6 +15,11 @@
         android:theme="@style/Theme.AndroidDemo"
         tools:targetApi="31">
         <activity
+            android:name=".BoxDemoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_box_demo"
+            android:theme="@style/Theme.AndroidDemo" />
+        <activity
             android:name=".compose.ColumnDemoActivity"
             android:exported="false"
             android:label="@string/title_activity_column_demo"
