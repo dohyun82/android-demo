@@ -13,6 +13,11 @@
         android:theme="@style/Theme.AndroidDemo"
         tools:targetApi="31">
         <activity
+            android:name=".compose.ComposeDemo2Activity"
+            android:exported="false"
+            android:label="@string/title_activity_compose_demo2"
+            android:theme="@style/Theme.AndroidDemo" />
+        <activity
             android:name=".compose.ComposeDemoActivity"
             android:exported="false"
             android:label="@string/title_activity_compose"
