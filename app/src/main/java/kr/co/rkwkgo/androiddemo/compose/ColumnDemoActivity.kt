@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import kr.co.rkwkgo.androiddemo.compose.ui.theme.AndroidDemoTheme
 import kotlin.random.Random
 
-class RowDemoActivity : ComponentActivity() {
+class ColumnDemoActivity : ComponentActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContent {
@@ -26,7 +26,7 @@ class RowDemoActivity : ComponentActivity() {
 					modifier = Modifier.fillMaxSize(),
 					color = MaterialTheme.colors.background
 				) {
-					HorizontalContainer()
+					VerticalContainer()
 				}
 			}
 		}
@@ -34,10 +34,10 @@ class RowDemoActivity : ComponentActivity() {
 }
 
 @Composable
-fun HorizontalContainer(){
-	Row(modifier = Modifier.background(Color.White).fillMaxSize(),
-		horizontalArrangement = Arrangement.SpaceEvenly,
-		verticalAlignment = Alignment.CenterVertically
+fun VerticalContainer() {
+	Column(modifier = Modifier.background(Color.White).fillMaxSize(),
+		verticalArrangement = Arrangement.SpaceEvenly,
+		horizontalAlignment = Alignment.CenterHorizontally
 		) {
 		DummyBox()
 		DummyBox()
@@ -58,8 +58,8 @@ private fun DummyBox(modifier: Modifier = Modifier){
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview3() {
+fun DefaultPreview4() {
 	AndroidDemoTheme {
-		HorizontalContainer()
+		VerticalContainer()
 	}
 }

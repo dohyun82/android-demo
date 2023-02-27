@@ -15,7 +15,12 @@
         android:theme="@style/Theme.AndroidDemo"
         tools:targetApi="31">
         <activity
-            android:name=".RowDemoActivity"
+            android:name=".compose.ColumnDemoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_column_demo"
+            android:theme="@style/Theme.AndroidDemo" />
+        <activity
+            android:name=".compose.RowDemoActivity"
             android:exported="false"
             android:label="@string/title_activity_row_demo"
             android:theme="@style/Theme.AndroidDemo" />
