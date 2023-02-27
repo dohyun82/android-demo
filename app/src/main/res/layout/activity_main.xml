@@ -46,4 +46,12 @@
         app:layout_constraintTop_toBottomOf="@id/btn_compose"
         />
 
+    <Button
+        android:id="@+id/btn_lazy_column_compose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Compose - LazyColumn"
+        app:layout_constraintTop_toBottomOf="@id/btn_compose2"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

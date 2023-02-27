@@ -8,6 +8,7 @@ import kr.co.rkwkgo.androiddemo.architecture.components.ui.LifecycleAwareDemoAct
 import kr.co.rkwkgo.androiddemo.architecture.components.ui.ViewBindingDemoActivity
 import kr.co.rkwkgo.androiddemo.compose.ComposeDemo2Activity
 import kr.co.rkwkgo.androiddemo.compose.ComposeDemoActivity
+import kr.co.rkwkgo.androiddemo.compose.ComposeLazyColumnActivity
 import kr.co.rkwkgo.androiddemo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +34,14 @@ class MainActivity : AppCompatActivity() {
 		binding.btnCompose2.setOnClickListener {
 			goComposeDemo2Activity()
 		}
+		binding.btnLazyColumnCompose.setOnClickListener {
+			goLazyColumnActivity()
+		}
+	}
+
+	private fun goLazyColumnActivity() {
+		val intent = Intent(this, ComposeLazyColumnActivity::class.java)
+		startActivity(intent)
 	}
 
 	private fun goViewBindingDemoActivity(){
