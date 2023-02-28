@@ -15,6 +15,11 @@
         android:theme="@style/Theme.AndroidDemo"
         tools:targetApi="31">
         <activity
+            android:name=".compose.LayoutActivity"
+            android:exported="false"
+            android:label="@string/title_activity_layout"
+            android:theme="@style/Theme.AndroidDemo" />
+        <activity
             android:name=".compose.StateActivity"
             android:exported="false"
             android:label="@string/title_activity_state"
