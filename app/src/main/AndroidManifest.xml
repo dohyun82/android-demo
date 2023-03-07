@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,6 +14,65 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidDemo"
         tools:targetApi="31">
+        <activity
+            android:name=".compose.LayoutActivity"
+            android:exported="false"
+            android:label="@string/title_activity_layout"
+            android:theme="@style/Theme.AndroidDemo" />
+        <activity
+            android:name=".compose.StateActivity"
+            android:exported="false"
+            android:label="@string/title_activity_state"
+            android:theme="@style/Theme.AndroidDemo" />
+        <activity
+            android:name=".compose.TextDemoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_text_demo"
+            android:theme="@style/Theme.AndroidDemo" />
+        <activity
+            android:name=".compose.BoxWithConstraintDemoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_box_with_constraint_demo"
+            android:theme="@style/Theme.AndroidDemo" />
+        <activity
+            android:name=".compose.BoxDemoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_box_demo"
+            android:theme="@style/Theme.AndroidDemo" />
+        <activity
+            android:name=".compose.ColumnDemoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_column_demo"
+            android:theme="@style/Theme.AndroidDemo" />
+        <activity
+            android:name=".compose.RowDemoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_row_demo"
+            android:theme="@style/Theme.AndroidDemo" />
+        <activity
+            android:name=".compose.ComposeLazyColumnActivity"
+            android:exported="false"
+            android:label="@string/title_activity_compose_lazy_column"
+            android:theme="@style/Theme.AndroidDemo" />
+        <activity
+            android:name=".compose.ComposeDemo3Activity"
+            android:exported="false"
+            android:label="@string/title_activity_compose_demo3"
+            android:theme="@style/Theme.AndroidDemo" />
+        <activity
+            android:name=".compose.ComposeDemo2Activity"
+            android:exported="false"
+            android:label="@string/title_activity_compose_demo2"
+            android:theme="@style/Theme.AndroidDemo" />
+        <activity
+            android:name=".compose.ComposeDemoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_compose"
+            android:theme="@style/Theme.AndroidDemo">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".kotlin.CoroutineDemoActivity"
             android:exported="false">
