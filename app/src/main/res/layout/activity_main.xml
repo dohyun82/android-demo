@@ -54,4 +54,12 @@
         app:layout_constraintTop_toBottomOf="@id/btn_compose2"
         />
 
+    <Button
+        android:id="@+id/btn_flutter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Flutter"
+        app:layout_constraintTop_toBottomOf="@id/btn_lazy_column_compose"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
