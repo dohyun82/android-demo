@@ -3,6 +3,7 @@ package kr.co.rkwkgo.androiddemo
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import io.flutter.embedding.android.FlutterActivity
 import kr.co.rkwkgo.androiddemo.architecture.components.data.DataStoreDemoActivity
 import kr.co.rkwkgo.androiddemo.architecture.components.ui.LifecycleAwareDemoActivity
@@ -41,6 +42,9 @@ class MainActivity : AppCompatActivity() {
 		binding.btnFlutter.setOnClickListener {
 			goFlutterActivity()
 		}
+		binding.btnFlutterSettings.setOnClickListener {
+			goFlutterSettingsActivity()
+		}
 	}
 
 	private fun goLazyColumnActivity() {
@@ -77,6 +81,25 @@ class MainActivity : AppCompatActivity() {
 		startActivity(
 			FlutterActivity.createDefaultIntent(this)
 		)
+	}
+
+	private fun goFlutterSettingsActivity(){
+		startActivityForResult(
+			FlutterActivity
+				.withNewEngine()
+				.initialRoute("/settings")
+				.build(this), 1000
+		)
+	}
+
+	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+		super.onActivityResult(requestCode, resultCode, data)
+		if(requestCode == 1000){
+			if(resultCode == RESULT_OK){
+				val msg = data?.getStringExtra("msg")
+				Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+			}
+		}
 	}
 
 }
