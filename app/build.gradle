@@ -27,14 +27,17 @@ android {
     }
 
     buildTypes {
+        profile {
+            initWith debug
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -84,6 +87,10 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.15.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.15.0'
 
+    // flutter module
+    debugImplementation 'kr.co.rkwkgo.module.my_flutter:flutter_debug:1.0'
+    profileImplementation 'kr.co.rkwkgo.module.my_flutter:flutter_profile:1.0'
+    releaseImplementation 'kr.co.rkwkgo.module.my_flutter:flutter_release:1.0'
 }
 
 protobuf{
