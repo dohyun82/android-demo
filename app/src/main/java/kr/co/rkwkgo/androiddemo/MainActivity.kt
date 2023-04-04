@@ -11,6 +11,7 @@ import kr.co.rkwkgo.androiddemo.architecture.components.ui.ViewBindingDemoActivi
 import kr.co.rkwkgo.androiddemo.compose.ComposeDemo2Activity
 import kr.co.rkwkgo.androiddemo.compose.ComposeDemoActivity
 import kr.co.rkwkgo.androiddemo.compose.ComposeLazyColumnActivity
+import kr.co.rkwkgo.androiddemo.composenew.ComposeNewActivity
 import kr.co.rkwkgo.androiddemo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -45,6 +46,15 @@ class MainActivity : AppCompatActivity() {
 		binding.btnFlutterSettings.setOnClickListener {
 			goFlutterSettingsActivity()
 		}
+
+		binding.btnComposeNew.setOnClickListener {
+			goComposeNewActivity()
+		}
+	}
+
+	private fun goComposeNewActivity() {
+		val intent = Intent(this, ComposeNewActivity::class.java)
+		startActivity(intent)
 	}
 
 	private fun goLazyColumnActivity() {

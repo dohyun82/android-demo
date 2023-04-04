@@ -14,15 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidDemo"
         tools:targetApi="31">
-
+        <activity
+            android:name=".composenew.ComposeNewActivity"
+            android:exported="false"
+            android:label="@string/title_activity_compose_new"
+            android:theme="@style/Theme.AndroidDemo" />
         <activity
             android:name="io.flutter.embedding.android.FlutterActivity"
-            android:theme="@style/Theme.AndroidDemo"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize"
-            />
-
+            android:theme="@style/Theme.AndroidDemo"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".compose.LayoutActivity"
             android:exported="false"

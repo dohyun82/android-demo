@@ -20,4 +20,5 @@
     </string>
     <string name="title_activity_state">StateActivity</string>
     <string name="title_activity_layout">LayoutActivity</string>
+    <string name="title_activity_compose_new">ComposeNewActivity</string>
 </resources>
