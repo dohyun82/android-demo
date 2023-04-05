@@ -8,7 +8,6 @@ import io.flutter.embedding.android.FlutterActivity
 import kr.co.rkwkgo.androiddemo.architecture.components.data.DataStoreDemoActivity
 import kr.co.rkwkgo.androiddemo.architecture.components.ui.LifecycleAwareDemoActivity
 import kr.co.rkwkgo.androiddemo.architecture.components.ui.ViewBindingDemoActivity
-import kr.co.rkwkgo.androiddemo.compose.ComposeDemo2Activity
 import kr.co.rkwkgo.androiddemo.compose.ComposeDemoActivity
 import kr.co.rkwkgo.androiddemo.compose.ComposeLazyColumnActivity
 import kr.co.rkwkgo.androiddemo.composenew.ComposeNewActivity
@@ -34,9 +33,6 @@ class MainActivity : AppCompatActivity() {
 		binding.btnCompose.setOnClickListener {
 			goComposeDemoActivity()
 		}
-		binding.btnCompose2.setOnClickListener {
-			goComposeDemo2Activity()
-		}
 		binding.btnLazyColumnCompose.setOnClickListener {
 			goLazyColumnActivity()
 		}
@@ -46,7 +42,6 @@ class MainActivity : AppCompatActivity() {
 		binding.btnFlutterSettings.setOnClickListener {
 			goFlutterSettingsActivity()
 		}
-
 		binding.btnComposeNew.setOnClickListener {
 			goComposeNewActivity()
 		}
@@ -79,11 +74,6 @@ class MainActivity : AppCompatActivity() {
 
 	private fun goComposeDemoActivity(){
 		val intent = Intent(this, ComposeDemoActivity::class.java)
-		startActivity(intent)
-	}
-
-	private fun goComposeDemo2Activity(){
-		val intent = Intent(this, ComposeDemo2Activity::class.java)
 		startActivity(intent)
 	}
 
