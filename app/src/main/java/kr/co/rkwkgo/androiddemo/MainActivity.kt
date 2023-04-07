@@ -11,6 +11,7 @@ import kr.co.rkwkgo.androiddemo.architecture.components.ui.ViewBindingDemoActivi
 import kr.co.rkwkgo.androiddemo.compose.ComposeDemoActivity
 import kr.co.rkwkgo.androiddemo.compose.ComposeLazyColumnActivity
 import kr.co.rkwkgo.androiddemo.composenew.ComposeNewActivity
+import kr.co.rkwkgo.androiddemo.composenew.material3.ComposeMaterial3Activity
 import kr.co.rkwkgo.androiddemo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -45,6 +46,14 @@ class MainActivity : AppCompatActivity() {
 		binding.btnComposeNew.setOnClickListener {
 			goComposeNewActivity()
 		}
+		binding.btnComposeMaterial3.setOnClickListener {
+			goComposeMaterial3Activity()
+		}
+	}
+
+	private fun goComposeMaterial3Activity() {
+		val intent = Intent(this, ComposeMaterial3Activity::class.java)
+		startActivity(intent)
 	}
 
 	private fun goComposeNewActivity() {
