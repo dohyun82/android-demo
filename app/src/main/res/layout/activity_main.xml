@@ -86,4 +86,12 @@
         app:layout_constraintTop_toBottomOf="@id/btn_compose_new"
         />
 
+    <Button
+        android:id="@+id/btn_compose_state"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Compose State"
+        app:layout_constraintTop_toBottomOf="@id/btn_compose_material3"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

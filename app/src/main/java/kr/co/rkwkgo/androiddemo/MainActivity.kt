@@ -12,6 +12,7 @@ import kr.co.rkwkgo.androiddemo.compose.ComposeDemoActivity
 import kr.co.rkwkgo.androiddemo.compose.ComposeLazyColumnActivity
 import kr.co.rkwkgo.androiddemo.composenew.ComposeNewActivity
 import kr.co.rkwkgo.androiddemo.composenew.material3.ComposeMaterial3Activity
+import kr.co.rkwkgo.androiddemo.composenew.state.ComposeStateActivity
 import kr.co.rkwkgo.androiddemo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -49,6 +50,14 @@ class MainActivity : AppCompatActivity() {
 		binding.btnComposeMaterial3.setOnClickListener {
 			goComposeMaterial3Activity()
 		}
+		binding.btnComposeState.setOnClickListener {
+			goComposeStateActivity()
+		}
+	}
+
+	private fun goComposeStateActivity() {
+		val intent = Intent(this, ComposeStateActivity::class.java)
+		startActivity(intent)
 	}
 
 	private fun goComposeMaterial3Activity() {
