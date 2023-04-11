@@ -3,6 +3,9 @@ package kr.co.rkwkgo.androiddemo.composenew.material3
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -27,28 +30,24 @@ class ComposeMaterial3Activity : ComponentActivity() {
 }
 
 @Composable
-private fun MyApp(
-	modifier: Modifier = Modifier,
-){
+private fun MyApp(modifier: Modifier = Modifier){
 
-	var shouldShowOnboarding by rememberSaveable {
-		mutableStateOf(true)
-	}
+	var shouldShowOnboarding by rememberSaveable { mutableStateOf(true) }
 
 	Surface(modifier = modifier) {
 		if(shouldShowOnboarding){
-			OnboardingScreen{
-				shouldShowOnboarding = false
-			}
+			OnboardingScreen(onContinueClicked ={ shouldShowOnboarding = false } )
 		}else{
 			Greetings()
 		}
 	}
-
 }
 
 @Composable
-fun OnboardingScreen(modifier: Modifier = Modifier, onContinueClicked : () -> Unit){
+fun OnboardingScreen(
+	onContinueClicked : () -> Unit,
+	modifier: Modifier = Modifier
+){
 	Column (
 		modifier = modifier.fillMaxSize(),
 		verticalArrangement = Arrangement.Center,
@@ -68,9 +67,9 @@ fun OnboardingScreen(modifier: Modifier = Modifier, onContinueClicked : () -> Un
 @Composable
 private fun Greetings(
 	modifier: Modifier = Modifier,
-	names: List<String> = List(1000) {"$it"}
+	names: List<String> = List(1000) { "$it" }
 ){
-	LazyColumn(modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)) {
+	LazyColumn(modifier = modifier.padding(vertical = 4.dp)) {
 		items(items = names) { name ->
 			Greeting(name = name)
 		}
@@ -87,34 +86,34 @@ fun OnboardingPreview(){
 
 @Composable
 private fun Greeting(name: String){
-	val expended = remember {
-		mutableStateOf(false)
-	}
-	val extraPadding = if (expended.value) 48.dp else 0.dp
 
+	var expended by remember { mutableStateOf(false) }
+
+	val extraPadding by animateDpAsState(
+		targetValue = if (expended) 48.dp else 0.dp,
+		animationSpec = spring(
+			dampingRatio = Spring.DampingRatioMediumBouncy,
+			stiffness = Spring.StiffnessLow
+		)
+	)
 	Surface(
 		color = MaterialTheme.colorScheme.primary,
-		modifier = Modifier.padding(vertical = 4.dp)) {
-		Row(
-			modifier = Modifier.padding(24.dp)
-		){
-			Column(
-				modifier = Modifier
+		modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+	) {
+		Row(modifier = Modifier.padding(24.dp)){
+			Column(modifier = Modifier
 					.weight(1F)
-					.padding(extraPadding)
+					.padding(bottom = extraPadding.coerceAtLeast(0.dp))
 			) {
 				Text(text = "Hello,")
 				Text(text = name)
 			}
 			ElevatedButton(
-				onClick = {
-					expended.value = !expended.value
-				},
+				onClick = { expended = !expended }
 			) {
-				Text(if (expended.value) "Show less" else "Show more")
+				Text(if (expended) "Show less" else "Show more")
 			}
 		}
-
 	}
 }
 
