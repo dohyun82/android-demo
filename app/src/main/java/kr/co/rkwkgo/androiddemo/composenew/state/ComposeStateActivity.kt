@@ -43,18 +43,25 @@ private fun getWellnessTasks() = List(30) { i -> WellnessTask(i, "Task # $i") }
 
 @Composable
 private fun WellnessTasksList(
+	list: List<WellnessTask>,
+	onCloseTask: (WellnessTask) -> Unit,
 	modifier: Modifier = Modifier,
-	list: List<WellnessTask> = remember { getWellnessTasks() }
 ){
 	LazyColumn(modifier = modifier){
-		items(list) { task ->
-			WellnessTaskItem(taskName = task.label)
+		items(
+			items = list,
+			key = { task -> task.id }
+		) { task ->
+			WellnessTaskItem(
+				taskName = task.label,
+				onClose = { onCloseTask(task) }
+			)
 		}
 	}
 }
 
 @Composable
-private fun WellnessTaskItem(taskName: String, modifier: Modifier = Modifier){
+private fun WellnessTaskItem(taskName: String, onClose: () -> Unit, modifier: Modifier = Modifier){
 	var checkedState by rememberSaveable {
 		mutableStateOf(false)
 	}
@@ -63,7 +70,7 @@ private fun WellnessTaskItem(taskName: String, modifier: Modifier = Modifier){
 		taskName = taskName,
 		checked = checkedState,
 		onCheckedChange = { newValue -> checkedState = newValue },
-		onClose = { },
+		onClose = onClose,
 		modifier = modifier
 	)
 }
@@ -100,7 +107,16 @@ private fun WellnessTaskItem(
 private fun WellnessScreen(modifier: Modifier = Modifier){
 	Column(modifier = modifier) {
 		StatefulCounter()
-		WellnessTasksList()
+
+		val list = remember {
+			getWellnessTasks().toMutableStateList()
+		}
+		WellnessTasksList(
+			list = list,
+			onCloseTask = { task ->
+				list.remove(task)
+			}
+		)
 	}
 }
 
