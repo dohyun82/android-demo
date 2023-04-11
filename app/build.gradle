@@ -94,7 +94,9 @@ dependencies {
     // Material Design 2
     implementation 'androidx.compose.material:material'
     // Material Design 3
-    implementation 'androidx.compose.material3:material3:1.0.1'
+    implementation 'androidx.compose.material3:material3'
+    // Optional - Add full set of material icons
+    implementation "androidx.compose.material:material-icons-extended"
     // Android Studio Preview support
     implementation 'androidx.compose.ui:ui-tooling-preview'
     debugImplementation 'androidx.compose.ui:ui-tooling'

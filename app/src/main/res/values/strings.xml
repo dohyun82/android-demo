@@ -22,4 +22,7 @@
     <string name="title_activity_layout">LayoutActivity</string>
     <string name="title_activity_compose_new">ComposeNewActivity</string>
     <string name="title_activity_compose_material3">ComposeMaterial3Activity</string>
+
+    <string name="show_less">Show less</string>
+    <string name="show_more">Show more</string>
 </resources>
