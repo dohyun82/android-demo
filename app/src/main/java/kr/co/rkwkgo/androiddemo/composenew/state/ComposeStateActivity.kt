@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import kr.co.rkwkgo.androiddemo.composenew.state.ui.theme.AndroidDemoTheme
 
 class ComposeStateActivity : ComponentActivity() {
@@ -36,14 +37,30 @@ class ComposeStateActivity : ComponentActivity() {
 	}
 }
 
-data class WellnessTask(val id: Int, val label: String)
+@Composable
+private fun WellnessScreen(
+	modifier: Modifier = Modifier,
+	wellnessViewModel: ComposeStateViewModel = viewModel()
+){
+	Column(modifier = modifier) {
+		StatefulCounter()
 
-private fun getWellnessTasks() = List(30) { i -> WellnessTask(i, "Task # $i") }
-
+		WellnessTasksList(
+			list = wellnessViewModel.tasks,
+			onCheckedTask = {task, checked ->
+				wellnessViewModel.changeTaskChecked(task, checked)
+			},
+			onCloseTask = { task ->
+				wellnessViewModel.remove(task)
+			}
+		)
+	}
+}
 
 @Composable
 private fun WellnessTasksList(
 	list: List<WellnessTask>,
+	onCheckedTask: (WellnessTask, Boolean) -> Unit,
 	onCloseTask: (WellnessTask) -> Unit,
 	modifier: Modifier = Modifier,
 ){
@@ -54,25 +71,12 @@ private fun WellnessTasksList(
 		) { task ->
 			WellnessTaskItem(
 				taskName = task.label,
+				checked = task.checked,
+				onCheckedChange = { checked -> onCheckedTask(task, checked) },
 				onClose = { onCloseTask(task) }
 			)
 		}
 	}
-}
-
-@Composable
-private fun WellnessTaskItem(taskName: String, onClose: () -> Unit, modifier: Modifier = Modifier){
-	var checkedState by rememberSaveable {
-		mutableStateOf(false)
-	}
-
-	WellnessTaskItem(
-		taskName = taskName,
-		checked = checkedState,
-		onCheckedChange = { newValue -> checkedState = newValue },
-		onClose = onClose,
-		modifier = modifier
-	)
 }
 
 @Composable
@@ -103,38 +107,13 @@ private fun WellnessTaskItem(
 	}
 }
 
-@Composable
-private fun WellnessScreen(modifier: Modifier = Modifier){
-	Column(modifier = modifier) {
-		StatefulCounter()
-
-		val list = remember {
-			getWellnessTasks().toMutableStateList()
-		}
-		WellnessTasksList(
-			list = list,
-			onCloseTask = { task ->
-				list.remove(task)
-			}
-		)
-	}
-}
 
 @Composable
-private fun WaterCounter(modifier: Modifier = Modifier){
-	Column(modifier = modifier.padding(16.dp)) {
-		var count by rememberSaveable { mutableStateOf(0) }
-		if (count > 0){
-			Text(text = "You've had $count glasses.",)
-		}
-		Button(
-			onClick = { count++ },
-			enabled = count < 10,
-			modifier = Modifier.padding(start = 8.dp)
-		) {
-			Text("Add one")
-		}
+private fun StatefulCounter(modifier: Modifier = Modifier){
+	var waterCount by rememberSaveable {
+		mutableStateOf(0)
 	}
+	StatelessCounter(count = waterCount, onIncrement = { waterCount ++ }, modifier = modifier)
 }
 
 @Composable
@@ -151,14 +130,6 @@ private fun StatelessCounter(count: Int, onIncrement: () -> Unit, modifier: Modi
 			Text("Add one")
 		}
 	}
-}
-
-@Composable
-private fun StatefulCounter(modifier: Modifier = Modifier){
-	var waterCount by rememberSaveable {
-		mutableStateOf(0)
-	}
-	StatelessCounter(count = waterCount, onIncrement = { waterCount ++ }, modifier = modifier)
 }
 
 @Preview(showBackground = true)
