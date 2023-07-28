@@ -8,6 +8,7 @@ import io.flutter.embedding.android.FlutterActivity
 import kr.co.rkwkgo.androiddemo.architecture.components.data.DataStoreDemoActivity
 import kr.co.rkwkgo.androiddemo.architecture.components.ui.LifecycleAwareDemoActivity
 import kr.co.rkwkgo.androiddemo.architecture.components.ui.ViewBindingDemoActivity
+import kr.co.rkwkgo.androiddemo.biometric.BiometricActivity
 import kr.co.rkwkgo.androiddemo.compose.ComposeDemoActivity
 import kr.co.rkwkgo.androiddemo.compose.ComposeLazyColumnActivity
 import kr.co.rkwkgo.androiddemo.composenew.ComposeNewActivity
@@ -53,6 +54,14 @@ class MainActivity : AppCompatActivity() {
 		binding.btnComposeState.setOnClickListener {
 			goComposeStateActivity()
 		}
+		binding.btnBioMetric.setOnClickListener {
+			goBioMetricActivity()
+		}
+	}
+
+	private fun goBioMetricActivity(){
+		val intent = Intent(this, BiometricActivity::class.java)
+		startActivity(intent)
 	}
 
 	private fun goComposeStateActivity() {
