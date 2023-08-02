@@ -26,4 +26,6 @@
     <string name="show_less">Show less</string>
     <string name="show_more">Show more</string>
     <string name="title_activity_compose_state">ComposeStateActivity</string>
+    <string name="title_activity_tutorial_demo">TutorialDemoActivity</string>
+    <string name="title_activity_compose_main">ComposeMainActivity</string>
 </resources>

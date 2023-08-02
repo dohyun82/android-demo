@@ -1,4 +1,4 @@
-package kr.co.rkwkgo.androiddemo.composenew.material3.ui.theme
+package kr.co.rkwkgo.androiddemo.view.compose.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

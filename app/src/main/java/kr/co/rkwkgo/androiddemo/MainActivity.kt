@@ -9,12 +9,8 @@ import kr.co.rkwkgo.androiddemo.architecture.components.data.DataStoreDemoActivi
 import kr.co.rkwkgo.androiddemo.architecture.components.ui.LifecycleAwareDemoActivity
 import kr.co.rkwkgo.androiddemo.architecture.components.ui.ViewBindingDemoActivity
 import kr.co.rkwkgo.androiddemo.biometric.BiometricActivity
-import kr.co.rkwkgo.androiddemo.compose.ComposeDemoActivity
-import kr.co.rkwkgo.androiddemo.compose.ComposeLazyColumnActivity
-import kr.co.rkwkgo.androiddemo.composenew.ComposeNewActivity
-import kr.co.rkwkgo.androiddemo.composenew.material3.ComposeMaterial3Activity
-import kr.co.rkwkgo.androiddemo.composenew.state.ComposeStateActivity
 import kr.co.rkwkgo.androiddemo.databinding.ActivityMainBinding
+import kr.co.rkwkgo.androiddemo.view.compose.ComposeMainActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,54 +29,23 @@ class MainActivity : AppCompatActivity() {
 		binding.btnLifecycleAware.setOnClickListener {
 			goLifecycleAwareDemoActivity()
 		}
-		binding.btnCompose.setOnClickListener {
-			goComposeDemoActivity()
-		}
-		binding.btnLazyColumnCompose.setOnClickListener {
-			goLazyColumnActivity()
-		}
 		binding.btnFlutter.setOnClickListener {
 			goFlutterActivity()
 		}
 		binding.btnFlutterSettings.setOnClickListener {
 			goFlutterSettingsActivity()
 		}
-		binding.btnComposeNew.setOnClickListener {
-			goComposeNewActivity()
-		}
-		binding.btnComposeMaterial3.setOnClickListener {
-			goComposeMaterial3Activity()
-		}
-		binding.btnComposeState.setOnClickListener {
-			goComposeStateActivity()
-		}
 		binding.btnBioMetric.setOnClickListener {
 			goBioMetricActivity()
+		}
+
+		binding.btnComposeMain.setOnClickListener {
+			goComposeMainActivity()
 		}
 	}
 
 	private fun goBioMetricActivity(){
 		val intent = Intent(this, BiometricActivity::class.java)
-		startActivity(intent)
-	}
-
-	private fun goComposeStateActivity() {
-		val intent = Intent(this, ComposeStateActivity::class.java)
-		startActivity(intent)
-	}
-
-	private fun goComposeMaterial3Activity() {
-		val intent = Intent(this, ComposeMaterial3Activity::class.java)
-		startActivity(intent)
-	}
-
-	private fun goComposeNewActivity() {
-		val intent = Intent(this, ComposeNewActivity::class.java)
-		startActivity(intent)
-	}
-
-	private fun goLazyColumnActivity() {
-		val intent = Intent(this, ComposeLazyColumnActivity::class.java)
 		startActivity(intent)
 	}
 
@@ -99,11 +64,6 @@ class MainActivity : AppCompatActivity() {
 		startActivity(intent)
 	}
 
-	private fun goComposeDemoActivity(){
-		val intent = Intent(this, ComposeDemoActivity::class.java)
-		startActivity(intent)
-	}
-
 	private fun goFlutterActivity(){
 		startActivity(
 			FlutterActivity.createDefaultIntent(this)
@@ -118,6 +78,15 @@ class MainActivity : AppCompatActivity() {
 				.build(this), 1000
 		)
 	}
+
+
+	/**
+	 * Compose 메인 이동
+	 */
+	private fun goComposeMainActivity(){
+		startActivity(Intent(this, ComposeMainActivity::class.java))
+	}
+
 
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 		super.onActivityResult(requestCode, resultCode, data)

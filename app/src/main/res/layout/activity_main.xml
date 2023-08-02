@@ -102,4 +102,12 @@
         app:layout_constraintTop_toBottomOf="@id/btn_compose_state"
         />
 
+    <Button
+        android:id="@+id/btn_compose_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Compose 메인"
+        app:layout_constraintTop_toBottomOf="@id/btn_bio_metric"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
