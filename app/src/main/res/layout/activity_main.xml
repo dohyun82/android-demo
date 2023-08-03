@@ -31,35 +31,11 @@
         />
 
     <Button
-        android:id="@+id/btn_compose"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Compose"
-        app:layout_constraintTop_toBottomOf="@id/btn_lifecycle_aware"
-        />
-
-    <Button
-        android:id="@+id/btn_compose2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Compose2"
-        app:layout_constraintTop_toBottomOf="@id/btn_compose"
-        />
-
-    <Button
-        android:id="@+id/btn_lazy_column_compose"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Compose - LazyColumn"
-        app:layout_constraintTop_toBottomOf="@id/btn_compose2"
-        />
-
-    <Button
         android:id="@+id/btn_flutter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Flutter"
-        app:layout_constraintTop_toBottomOf="@id/btn_lazy_column_compose"
+        app:layout_constraintTop_toBottomOf="@id/btn_lifecycle_aware"
         />
 
     <Button
@@ -71,35 +47,11 @@
         />
 
     <Button
-        android:id="@+id/btn_compose_new"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Compose New"
-        app:layout_constraintTop_toBottomOf="@id/btn_flutter_settings"
-        />
-
-    <Button
-        android:id="@+id/btn_compose_material3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Compose Material3"
-        app:layout_constraintTop_toBottomOf="@id/btn_compose_new"
-        />
-
-    <Button
-        android:id="@+id/btn_compose_state"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Compose State"
-        app:layout_constraintTop_toBottomOf="@id/btn_compose_material3"
-        />
-
-    <Button
         android:id="@+id/btn_bio_metric"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="생체 인증"
-        app:layout_constraintTop_toBottomOf="@id/btn_compose_state"
+        app:layout_constraintTop_toBottomOf="@id/btn_flutter_settings"
         />
 
     <Button
