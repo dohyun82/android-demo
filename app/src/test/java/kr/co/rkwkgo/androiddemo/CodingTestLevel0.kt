@@ -12,6 +12,33 @@ import kotlin.math.*
 class CodingTestLevel0 {
 
 	/**
+	 * 추억 점수
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/176963
+	 */
+	@Test
+	fun memoryScore(){
+		val name = arrayOf("may", "kein", "kain", "radi")
+		val yearning = intArrayOf(5, 10, 1, 3)
+		val photo = arrayOf(arrayOf("may", "kein", "kain", "radi"), arrayOf("may", "kein", "brin", "deny"), arrayOf("kon", "kain", "may", "coni"))
+		val result = memoryScore(name, yearning, photo)
+		println(result.toList())
+//		Assert.assertEquals(result, arrayOf(19, 15, 6))
+	}
+
+	private fun memoryScore(name: Array<String>, yearning: IntArray, photo: Array<Array<String>>): IntArray{
+		return photo.map { pic ->
+			pic.sumOf {
+				val idx = name.indexOf(it)
+				if(idx!=-1){
+					yearning[idx]
+				}else{
+					0
+				}
+			}
+		}.toIntArray()
+	}
+
+	/**
 	 * 두 수의 합
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/120802
 	 */
