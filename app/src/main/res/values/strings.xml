@@ -28,4 +28,5 @@
     <string name="title_activity_compose_state">ComposeStateActivity</string>
     <string name="title_activity_tutorial_demo">TutorialDemoActivity</string>
     <string name="title_activity_compose_main">ComposeMainActivity</string>
+    <string name="title_activity_compose_tutorial2">ComposeTutorial2Activity</string>
 </resources>

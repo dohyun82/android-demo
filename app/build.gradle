@@ -91,7 +91,7 @@ dependencies {
     implementation composeBom
     androidTestImplementation composeBom
     // Material Design 2
-    implementation 'androidx.compose.material:material'
+//    implementation 'androidx.compose.material:material'
     // Material Design 3
     implementation 'androidx.compose.material3:material3'
     // Optional - Add full set of material icons
