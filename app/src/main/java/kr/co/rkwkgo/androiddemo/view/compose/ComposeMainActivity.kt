@@ -21,12 +21,20 @@ import kr.co.rkwkgo.androiddemo.view.compose.ui.theme.AndroidDemoTheme
  *
  */
 class ComposeMainActivity : ComponentActivity() {
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContent {
 			AndroidDemoTheme {
 				ComposeMainLayout {
-					startActivity(Intent(this@ComposeMainActivity, ComposeTutorialActivity::class.java))
+					when(it){
+						"Tutorial" -> {
+							startActivity(Intent(this@ComposeMainActivity, ComposeTutorialActivity::class.java))
+						}
+						"BasicLayout" -> {
+							startActivity(Intent(this@ComposeMainActivity, BasicLayoutActivity::class.java))
+						}
+					}
 				}
 			}
 		}
@@ -35,17 +43,7 @@ class ComposeMainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ComposeMainLayout(onClick : ()-> Unit){
-//	modifier: Modifier = Modifier,
-//	topBar: @Composable () -> Unit = {},
-//	bottomBar: @Composable () -> Unit = {},
-//	snackbarHost: @Composable () -> Unit = {},
-//	floatingActionButton: @Composable () -> Unit = {},
-//	floatingActionButtonPosition: FabPosition = FabPosition.End,
-//	containerColor: Color = MaterialTheme.colorScheme.background,
-//	contentColor: Color = contentColorFor(containerColor),
-//	contentWindowInsets: WindowInsets = ScaffoldDefaults.contentWindowInsets,
-//	content: @Composable (PaddingValues) -> Unit
+fun ComposeMainLayout(onClick : (type: String)-> Unit){
 	Scaffold(
 		topBar = {
 			TopAppBar(title = {
@@ -54,8 +52,15 @@ fun ComposeMainLayout(onClick : ()-> Unit){
 		},
 	){
 		Column(modifier = Modifier.padding(it)) {
-			Button(onClick = onClick) {
-				Text(text = "Compose Tutorial")
+			Button(onClick = {
+				onClick("Tutorial")
+			}) {
+				Text(text = "Tutorial")
+			}
+			Button(onClick = {
+				onClick("BasicLayout")
+			}) {
+				Text(text = "BasicLayout")
 			}
 		}
 	}
