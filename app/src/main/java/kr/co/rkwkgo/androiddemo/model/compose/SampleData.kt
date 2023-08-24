@@ -2,7 +2,29 @@ package kr.co.rkwkgo.androiddemo.model.compose
 
 data class Message(val author: String, val body: String)
 
+data class UserInfo(val name: String, val age: Int)
+
 object SampleData {
+
+	val userInfoList = listOf(
+		UserInfo("김도현", 41),
+		UserInfo("김도현", 41),
+		UserInfo("김도현", 41),
+		UserInfo("김도현", 41),
+		UserInfo("김도현", 41),
+		UserInfo("김도현", 41),
+		UserInfo("김도현", 41),
+		UserInfo("김도현", 41),
+		UserInfo("김도현", 41),
+		UserInfo("김도현", 41),
+		UserInfo("김도현", 41),
+		UserInfo("김도현", 41),
+		UserInfo("김도현", 41),
+		UserInfo("김도현", 41),
+		UserInfo("김도현", 41),
+		UserInfo("김도현", 41),
+	)
+
 	// Sample conversation data
 	val conversationSample = listOf(
 		Message(
