@@ -12,7 +12,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -53,30 +52,51 @@ class ComposeTutorialActivity : ComponentActivity() {
 }
 
 @Composable
-fun MessageCard(msg: Message){
+fun Conversation(messages: List<Message>){
+	LazyColumn{
+		items(messages) { message ->
+			MessageCard(msg = message)
+		}
+	}
+}
 
-	Row(modifier = Modifier.padding(all = 8.dp)){
+@Preview
+@Composable
+fun PreviewConversation(){
+	AndroidDemoTheme {
+		Conversation(messages = SampleData.conversationSample)
+	}
+}
+
+
+@Composable
+fun MessageCard(msg: Message){
+	Row(
+		modifier = Modifier.padding(all = 8.dp)
+	){
 		Image(
 			painter = painterResource(id = R.drawable.profile_picture),
-			contentDescription = "프로필 이미지",
+			contentDescription = "Contact profile picture",
 			modifier = Modifier
 				.size(40.dp)
 				.clip(CircleShape)
 				.border(1.5.dp, MaterialTheme.colorScheme.primary, CircleShape)
 		)
-
 		Spacer(modifier = Modifier.width(8.dp))
 
 		var isExpanded by remember { mutableStateOf(false) }
 		val surfaceColor by animateColorAsState(
-			targetValue = if (isExpanded) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface
+			if (isExpanded) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
+			label = ""
 		)
 
-		Column(modifier = Modifier.clickable { isExpanded = !isExpanded }) {
+		Column(modifier = Modifier.clickable {
+			isExpanded = !isExpanded
+		}) {
 			Text(
 				text = msg.author,
 				color = MaterialTheme.colorScheme.secondary,
-				style = MaterialTheme.typography.titleSmall,
+				style = MaterialTheme.typography.titleSmall
 			)
 			Spacer(modifier = Modifier.height(4.dp))
 			Surface(
@@ -87,7 +107,7 @@ fun MessageCard(msg: Message){
 			) {
 				Text(
 					text = msg.body,
-					modifier = Modifier.padding(all = 4.dp),
+					modifier = Modifier.padding(4.dp),
 					maxLines = if(isExpanded) Int.MAX_VALUE else 1,
 					style = MaterialTheme.typography.bodyMedium
 				)
@@ -108,28 +128,9 @@ fun PreviewMessageCard(){
 		Surface {
 			MessageCard(
 				msg = Message(
-					author = "rkwkgo",
-					body = "내용 블라블라블라~~~"
+					"Lexi", "Hey, take a look at Jetpack Compose, it's great!"
 				)
 			)
 		}
-	}
-}
-
-
-@Composable
-fun Conversation(messages: List<Message>){
-	LazyColumn{
-		items(messages) { message ->
-			MessageCard(msg = message)
-		}
-	}
-}
-
-@Preview
-@Composable
-fun PreviewConversation(){
-	AndroidDemoTheme {
-		Conversation(messages = SampleData.conversationSample)
 	}
 }

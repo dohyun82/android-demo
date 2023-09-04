@@ -31,4 +31,5 @@
     <string name="title_activity_compose_tutorial2">ComposeTutorial2Activity</string>
     <string name="title_activity_basic_layout">BasicLayoutActivity</string>
     <string name="title_activity_tutorial">TutorialActivity</string>
+    <string name="title_activity_basic_code_lab">BasicCodeLabActivity</string>
 </resources>

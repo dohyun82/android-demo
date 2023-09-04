@@ -37,6 +37,9 @@ class ComposeMainActivity : ComponentActivity() {
 						"BasicLayout" -> {
 							startActivity(Intent(this@ComposeMainActivity, BasicLayoutActivity::class.java))
 						}
+						"BasicCodeLab" -> {
+							startActivity(Intent(this@ComposeMainActivity, BasicCodeLabActivity::class.java))
+						}
 					}
 				}
 			}
@@ -69,6 +72,11 @@ fun ComposeMainLayout(onClick : (type: String)-> Unit){
 				onClick("BasicLayout")
 			}) {
 				Text(text = "BasicLayout")
+			}
+			Button(onClick = {
+				onClick("BasicCodeLab")
+			}) {
+				Text(text = "BasicCodeLab")
 			}
 		}
 	}
