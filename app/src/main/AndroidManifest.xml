@@ -15,6 +15,11 @@
         android:theme="@style/Theme.AndroidDemo"
         tools:targetApi="31">
         <activity
+            android:name=".view.compose.ComposeLifecycleActivity"
+            android:exported="false"
+            android:label="@string/title_activity_compose_lifecycle"
+            android:theme="@style/Theme.AndroidDemo" />
+        <activity
             android:name=".view.compose.BottomSheetsActivity"
             android:exported="false"
             android:label="@string/title_activity_bottom_sheets"

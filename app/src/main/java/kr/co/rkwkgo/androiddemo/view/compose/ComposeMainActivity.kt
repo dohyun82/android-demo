@@ -28,20 +28,23 @@ class ComposeMainActivity : ComponentActivity() {
 			AndroidDemoTheme {
 				ComposeMainLayout {
 					when(it){
-						"Tutorial" -> {
+						ComposeFeature.Tutorial -> {
 							startActivity(Intent(this@ComposeMainActivity, ComposeTutorialActivity::class.java))
 						}
-						"Tutorial2" -> {
+						ComposeFeature.Tutorial2 -> {
 							startActivity(Intent(this@ComposeMainActivity, TutorialActivity::class.java))
 						}
-						"BasicLayout" -> {
+						ComposeFeature.BasicLayout -> {
 							startActivity(Intent(this@ComposeMainActivity, BasicLayoutActivity::class.java))
 						}
-						"BasicCodeLab" -> {
+						ComposeFeature.BasicCodeLab -> {
 							startActivity(Intent(this@ComposeMainActivity, BasicCodeLabActivity::class.java))
 						}
-						"BottomSheets" -> {
+						ComposeFeature.BottomSheets -> {
 							startActivity(Intent(this@ComposeMainActivity, BottomSheetsActivity::class.java))
+						}
+						ComposeFeature.Lifecycle -> {
+							startActivity(Intent(this@ComposeMainActivity, ComposeLifecycleActivity::class.java))
 						}
 					}
 				}
@@ -52,7 +55,7 @@ class ComposeMainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ComposeMainLayout(onClick : (type: String)-> Unit){
+fun ComposeMainLayout(onClick : (type: ComposeFeature)-> Unit){
 	Scaffold(
 		topBar = {
 			TopAppBar(title = {
@@ -62,29 +65,34 @@ fun ComposeMainLayout(onClick : (type: String)-> Unit){
 	){
 		Column(modifier = Modifier.padding(it)) {
 			Button(onClick = {
-				onClick("Tutorial")
+				onClick(ComposeFeature.Tutorial)
 			}) {
-				Text(text = "Tutorial")
+				Text(text = ComposeFeature.Tutorial.name)
 			}
 			Button(onClick = {
-				onClick("Tutorial2")
+				onClick(ComposeFeature.Tutorial2)
 			}) {
-				Text(text = "Tutorial2")
+				Text(text = ComposeFeature.Tutorial2.name)
 			}
 			Button(onClick = {
-				onClick("BasicLayout")
+				onClick(ComposeFeature.BasicLayout)
 			}) {
-				Text(text = "BasicLayout")
+				Text(text = ComposeFeature.BasicLayout.name)
 			}
 			Button(onClick = {
-				onClick("BasicCodeLab")
+				onClick(ComposeFeature.BasicCodeLab)
 			}) {
-				Text(text = "BasicCodeLab")
+				Text(text = ComposeFeature.BasicCodeLab.name)
 			}
 			Button(onClick = {
-				onClick("BottomSheets")
+				onClick(ComposeFeature.BottomSheets)
 			}) {
-				Text(text = "BottomSheets")
+				Text(text = ComposeFeature.BottomSheets.name)
+			}
+			Button(onClick = {
+				onClick(ComposeFeature.Lifecycle)
+			}) {
+				Text(text = ComposeFeature.Lifecycle.name)
 			}
 		}
 	}
@@ -96,4 +104,12 @@ fun PreviewComposeMainLayout(){
 	ComposeMainLayout {
 
 	}
+}
+enum class ComposeFeature{
+	Tutorial,
+	Tutorial2,
+	BasicLayout,
+	BasicCodeLab,
+	BottomSheets,
+	Lifecycle,
 }
