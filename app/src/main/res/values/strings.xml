@@ -34,4 +34,5 @@
     <string name="title_activity_basic_code_lab">BasicCodeLabActivity</string>
     <string name="title_activity_bottom_sheets">BottomSheetsActivity</string>
     <string name="title_activity_compose_lifecycle">ComposeLifecycleActivity</string>
+    <string name="title_activity_compose_components">ComposeComponentsActivity</string>
 </resources>

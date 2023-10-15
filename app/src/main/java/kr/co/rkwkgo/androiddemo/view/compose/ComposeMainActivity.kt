@@ -46,6 +46,9 @@ class ComposeMainActivity : ComponentActivity() {
 						ComposeFeature.Lifecycle -> {
 							startActivity(Intent(this@ComposeMainActivity, ComposeLifecycleActivity::class.java))
 						}
+						ComposeFeature.Components -> {
+							startActivity(Intent(this@ComposeMainActivity, ComposeComponentsActivity::class.java))
+						}
 					}
 				}
 			}
@@ -94,6 +97,11 @@ fun ComposeMainLayout(onClick : (type: ComposeFeature)-> Unit){
 			}) {
 				Text(text = ComposeFeature.Lifecycle.name)
 			}
+			Button(onClick = {
+				onClick(ComposeFeature.Components)
+			}) {
+				Text(text = ComposeFeature.Components.name)
+			}
 		}
 	}
 }
@@ -112,4 +120,5 @@ enum class ComposeFeature{
 	BasicCodeLab,
 	BottomSheets,
 	Lifecycle,
+	Components,
 }
