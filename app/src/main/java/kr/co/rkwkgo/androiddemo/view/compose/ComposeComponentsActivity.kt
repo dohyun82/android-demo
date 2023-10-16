@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,17 +17,22 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MediumTopAppBar
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
@@ -68,7 +74,58 @@ fun ComponentsContent(){
 //			SmallTopAppBarExample()
 //			CenterAlignedTopAppBarExample()
 //			MediumTopAppBarExample()
-			LargeTopAppBarExample()
+//			LargeTopAppBarExample()
+//			FilledButtonExample{}
+//			FilledTonalButtonExample{}
+//			OutlinedButtonExample{}
+//			ElevatedButtonExample{}
+			TextButtonExample{}
+		}
+	}
+}
+
+@Composable
+private fun TextButtonExample(onClick: () -> Unit){
+	Box{
+		TextButton(onClick = onClick) {
+			Text("Text Button")
+		}
+	}
+}
+
+@Composable
+private fun ElevatedButtonExample(onClick: () -> Unit){
+	Box{
+		ElevatedButton(onClick = onClick) {
+			Text("Elevated")
+		}
+	}
+}
+
+@Composable
+private fun OutlinedButtonExample(onClick: () -> Unit){
+	Box{
+		OutlinedButton(onClick = onClick) {
+			Text("Outlined")
+		}
+	}
+}
+
+@Composable
+private fun FilledTonalButtonExample(onClick: () -> Unit){
+	Box{
+		FilledTonalButton(onClick = onClick) {
+			Text("Tonal")
+		}
+	}
+}
+
+
+@Composable
+private fun FilledButtonExample(onClick: () -> Unit){
+	Box{
+		Button(onClick = onClick) {
+			Text("Filled")
 		}
 	}
 }
