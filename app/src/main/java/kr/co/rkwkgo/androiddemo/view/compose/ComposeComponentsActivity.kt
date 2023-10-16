@@ -11,25 +11,30 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -45,6 +50,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextAlign
@@ -79,7 +85,62 @@ fun ComponentsContent(){
 //			FilledTonalButtonExample{}
 //			OutlinedButtonExample{}
 //			ElevatedButtonExample{}
-			TextButtonExample{}
+//			TextButtonExample{}
+//			FABExample{}
+//			FABSmallExample{}
+//			FABLargeExample{}
+			FABExtendedExample{}
+		}
+	}
+}
+
+@Composable
+private fun FABExtendedExample(onClick: () -> Unit){
+	Box{
+		ExtendedFloatingActionButton(
+			onClick = onClick,
+			icon = {
+				   Icon(Icons.Filled.Edit, "Extended floating action button.")
+			},
+			text = {
+				Text("Extended FAB")
+			}
+		)
+	}
+}
+
+@Composable
+private fun FABLargeExample(onClick: () -> Unit){
+	Box{
+		LargeFloatingActionButton(
+			onClick = onClick,
+			shape = CircleShape
+		) {
+			Icon(Icons.Filled.Add, "Large floating action button")
+		}
+	}
+}
+
+@Composable
+private fun FABSmallExample(onClick: () -> Unit){
+	Box{
+		SmallFloatingActionButton(
+			onClick = onClick,
+			containerColor = MaterialTheme.colorScheme.secondaryContainer,
+			contentColor = MaterialTheme.colorScheme.secondary
+		) {
+			Icon(imageVector = Icons.Filled.Add, contentDescription = "Small floating action button.")
+		}
+	}
+}
+
+@Composable
+private fun FABExample(onClick: () -> Unit){
+	Box(
+		contentAlignment = Alignment.BottomEnd
+	){
+		FloatingActionButton(onClick = onClick) {
+			Icon(imageVector = Icons.Filled.Add, contentDescription = "Floating action button.")
 		}
 	}
 }
