@@ -1,8 +1,11 @@
 package kr.co.rkwkgo.androiddemo.view.compose
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,48 +13,63 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.InputChip
+import androidx.compose.material3.InputChipDefaults
 import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SmallFloatingActionButton
+import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
-import androidx.compose.material3.TopAppBarScrollBehavior
-import androidx.compose.material3.contentColorFor
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -89,7 +107,169 @@ fun ComponentsContent(){
 //			FABExample{}
 //			FABSmallExample{}
 //			FABLargeExample{}
-			FABExtendedExample{}
+//			FABExtendedExample{}
+//			CardMinimalExample()
+//			ElevatedCardExample()
+//			OutlinedCardExample()
+//			AssistChipExample()
+//			FilterChipExample()
+//			InputChipExample(
+//				"Input chip",
+//				onDismiss = {
+//
+//				}
+//			)
+			SuggestionChipExample()
+		}
+	}
+}
+
+@Composable
+private fun SuggestionChipExample(){
+	SuggestionChip(onClick = {  }, label = { Text("Suggestion chip") })
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun InputChipExample(
+	text: String,
+	onDismiss: () -> Unit
+){
+	var enabled by remember {
+		mutableStateOf(true)
+	}
+	if(!enabled) return
+
+	InputChip(
+		onClick = {
+			onDismiss()
+			enabled = !enabled
+	    },
+		label = { Text(text) },
+		selected = enabled,
+		avatar = {
+			Icon(
+				Icons.Filled.Person,
+				contentDescription = "Localized description",
+				Modifier.size(InputChipDefaults.AvatarSize)
+			)
+		},
+		trailingIcon = {
+			Icon(
+				Icons.Default.Close,
+				contentDescription = "Localized description",
+				Modifier.size(InputChipDefaults.AvatarSize)
+			)
+		}
+	)
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun FilterChipExample(){
+	var selected by remember {
+		mutableStateOf(false)
+	}
+
+	FilterChip(
+		selected = selected,
+		onClick = { selected = !selected },
+		label = {
+			Text("Filter chip")
+		},
+		leadingIcon = if (selected){
+			{
+				Icon(
+					imageVector = Icons.Filled.Done,
+					contentDescription = "Done icon",
+					modifier = Modifier.size(FilterChipDefaults.IconSize)
+				)
+			}
+		}else{
+			null
+		},
+	)
+
+}
+
+@Composable
+private fun AssistChipExample(){
+	Box{
+		AssistChip(
+			onClick = {
+				Log.d("Assist chip", "hello world")
+			},
+			label = {
+				Text("Assist chip")
+			},
+			leadingIcon = {
+				Icon(
+					imageVector = Icons.Filled.Settings,
+					contentDescription = "Localized description",
+					Modifier.size(AssistChipDefaults.IconSize)
+				)
+			}
+		)
+	}
+}
+
+@Composable
+private fun OutlinedCardExample(){
+	Box{
+		OutlinedCard(
+			colors = CardDefaults.cardColors(
+				containerColor = Color.Red
+			),
+			border = BorderStroke(1.dp, Color.Black),
+			modifier = Modifier
+				.size(width = 240.dp, height = 100.dp)
+		) {
+			Text(
+				text = "Outlined",
+				modifier = Modifier.padding(16.dp),
+				textAlign = TextAlign.Center
+			)
+		}
+	}
+}
+
+@Composable
+private fun ElevatedCardExample(){
+	Box{
+		ElevatedCard(
+			elevation = CardDefaults.cardElevation(
+				defaultElevation = 6.dp
+			),
+			modifier = Modifier.size(
+				width = 240.dp,
+				height = 100.dp
+			)
+		) {
+			Text(
+				text = "Elevated",
+				modifier = Modifier.padding(16.dp),
+				textAlign = TextAlign.Center
+			)
+		}
+	}
+}
+
+@Composable
+private fun CardMinimalExample(){
+	Box(
+		contentAlignment = Alignment.Center
+	){
+		Card(
+			colors = CardDefaults.cardColors(
+				containerColor = Color.Yellow
+			),
+			modifier = Modifier.size(width = 240.dp, height = 100.dp)
+		){
+			Text(
+				text = "Hello, world!",
+				modifier = Modifier.padding(16.dp),
+				textAlign = TextAlign.Center,
+			)
 		}
 	}
 }
