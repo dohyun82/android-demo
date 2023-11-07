@@ -4,8 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.gestures.rememberScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -49,6 +53,9 @@ class ComposeMainActivity : ComponentActivity() {
 						ComposeFeature.Components -> {
 							startActivity(Intent(this@ComposeMainActivity, ComposeComponentsActivity::class.java))
 						}
+						ComposeFeature.Animation -> {
+							startActivity(Intent(this@ComposeMainActivity, ComposeComponentsActivity::class.java))
+						}
 					}
 				}
 			}
@@ -66,7 +73,9 @@ fun ComposeMainLayout(onClick : (type: ComposeFeature)-> Unit){
 			})
 		},
 	){
-		Column(modifier = Modifier.padding(it)) {
+		Column(modifier = Modifier
+			.padding(it)
+			.verticalScroll(rememberScrollState())) {
 			Button(onClick = {
 				onClick(ComposeFeature.Tutorial)
 			}) {
@@ -102,6 +111,11 @@ fun ComposeMainLayout(onClick : (type: ComposeFeature)-> Unit){
 			}) {
 				Text(text = ComposeFeature.Components.name)
 			}
+			Button(onClick = {
+				onClick(ComposeFeature.Animation)
+			}) {
+				Text(text = ComposeFeature.Animation.name)
+			}
 		}
 	}
 }
@@ -121,4 +135,5 @@ enum class ComposeFeature{
 	BottomSheets,
 	Lifecycle,
 	Components,
+	Animation,
 }

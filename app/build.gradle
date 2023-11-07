@@ -113,6 +113,10 @@ dependencies {
     // Optional - Integration with LiveData
     implementation 'androidx.compose.runtime:runtime-livedata'
 
+    def nav_version = "2.7.5"
+    // Jetpack Compose Integration
+    implementation "androidx.navigation:navigation-compose:$nav_version"
+
     // 생체인증 라이브러리
     implementation 'androidx.biometric:biometric:1.1.0'
 
