@@ -11,6 +11,99 @@ import kotlin.math.*
  */
 class CodingTestLevel0 {
 
+
+	/**
+	 * 문자열 겹쳐쓰기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181943
+	 */
+	@Test
+	fun overwritingStrings(){
+		val my_string = "He11oWor1d"
+		val overwrite_string = "lloWorl"
+		val s = 2
+		val result = overwritingStrings(my_string, overwrite_string, s)
+		Assert.assertEquals("HelloWorld", result)
+	}
+
+	private fun overwritingStrings(my_string: String, overwrite_string: String, s: Int): String {
+
+		return my_string.replaceRange(s, s + overwrite_string.length, overwrite_string)
+
+//		return if(my_string.length>overwrite_string.length){
+//			my_string.substring(0 until s) + overwrite_string + my_string.substring(s+overwrite_string.length)
+//		}else{
+//			my_string.substring(0 until s) + overwrite_string
+//	    }
+	}
+
+	/**
+	 * 대소문자 바꿔서 출력하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181949
+	 */
+	@Test
+	fun printWithCaseChanged(){
+		val s1 = "aBcDeFg"
+		val result = printWithCaseChanged(s1)
+		Assert.assertEquals("AbCdEfG", result)
+	}
+
+	private fun printWithCaseChanged(s1: String): String{
+		val result = s1.map {
+			if(it.isUpperCase()){
+				it.lowercase()
+			}else{
+				it.uppercase()
+			}
+		}.joinToString("")
+		print(result)
+		return result
+	}
+
+	/**
+	 * 문자열 반복해서 출력하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181950
+	 */
+	@Test
+	fun printingStringRepeatedly(){
+		val str = "string"
+		val count = 5
+		printingStringRepeatedly(str, count)
+	}
+
+	private fun printingStringRepeatedly(str: String, count: Int){
+		for(i in 0 until count){
+			print(str)
+		}
+
+		repeat(count){
+			print(str)
+		}
+
+	}
+
+	/**
+	 * a뫄 b 출력하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181951
+	 */
+	@Test
+	fun printAWithB(){
+		val a = 4
+		val b = 5
+		val result = printAWithB(a, b)
+		Assert.assertEquals("""
+			a = 4
+			b = 5
+		""".trimIndent(), result)
+	}
+
+	private fun printAWithB(a: Int, b: Int){
+		println("""
+			a = $a
+			b = $b
+		""".trimIndent())
+	}
+
+
 	/**
 	 * 추억 점수
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/176963
