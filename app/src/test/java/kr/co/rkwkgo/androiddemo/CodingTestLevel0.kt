@@ -11,6 +11,100 @@ import kotlin.math.*
  */
 class CodingTestLevel0 {
 
+	/**
+	 * 두 수의 연산값 비교하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181938
+	 */
+	@Test
+	fun TestCompareTwoNumbers(){
+		val a = 2
+		val b = 91
+		val result = compareTwoNumbers(a, b)
+		Assert.assertEquals(364, result)
+	}
+
+	private fun compareTwoNumbers(a: Int, b: Int): Int {
+		return max("$a$b".toInt(), 2 * a * b)
+	}
+
+	/**
+	 * 더 크게 합치기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181939
+	 */
+	@Test
+	fun TestCombineBigger(){
+		val a = 9
+		val b = 91
+		val result = combineBigger(a, b)
+		Assert.assertEquals(991, result)
+	}
+
+
+	private fun combineBigger(a: Int, b: Int): Int {
+		return max("$a$b".toInt(),"$b$a".toInt())
+	}
+
+
+	/**
+	 * 문자열 곱하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181940
+	 */
+	@Test
+	fun TestStringMultiplication(){
+		val my_string = "string"
+		val k = 3
+		val result = stringMultiplication(my_string, k)
+		Assert.assertEquals("stringstringstring", result)
+	}
+
+	private fun stringMultiplication(my_string: String, k: Int): String {
+
+		return my_string.repeat(k)
+
+//		val sb = StringBuilder()
+//		repeat(k){
+//			sb.append(my_string)
+//		}
+//		return sb.toString()
+	}
+
+	/**
+	 * 문자 리스트를 문자열로 변환하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181941
+	 */
+	@Test
+	fun testConvertingListOfCharactersToString(){
+		val arr = arrayOf("a","b","c")
+		val result = convertingListOfCharactersToString(arr)
+		Assert.assertEquals("abc", result)
+	}
+
+	private fun convertingListOfCharactersToString(arr: Array<String>): String{
+		return arr.joinToString("")
+	}
+
+	/**
+	 * 문자열 섞기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181942
+	 */
+	@Test
+	fun shuffleStrings(){
+		val str1 = "aaaaa"
+		val str2 = "bbbbb"
+		val result = shuffleStrings(str1, str2)
+		Assert.assertEquals("ababababab", result)
+	}
+
+	private fun shuffleStrings(str1: String, str2: String): String{
+
+		return str1.zip(str2).joinToString(""){ (a, b) ->
+			"$a$b"
+		}
+
+//		return str1.mapIndexed{ i, c ->
+//			"$c${str2[i]}"
+//		}.joinToString("")
+	}
 
 	/**
 	 * 문자열 겹쳐쓰기
