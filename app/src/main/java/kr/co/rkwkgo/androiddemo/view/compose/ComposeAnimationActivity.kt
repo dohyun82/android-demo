@@ -59,6 +59,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.material.icons.Icons
@@ -163,48 +164,379 @@ private fun AnimationPage(){
 			)
 		},
 	) {
-		AnimationPage(Modifier.padding(it))
+		AnimationBody(Modifier.padding(it))
 	}
 }
 
 @Composable
-private fun AnimationPage(
+private fun AnimationBody(
 	modifier: Modifier = Modifier
 ){
 	Box(
 		modifier = modifier.fillMaxWidth(),
 		contentAlignment = Alignment.Center
 	){
-		DemoRememberInfiniteTransition2()
-//		AnimatingBox()
-//		DemoTransitionWithAnimatedVisibilityAndAnimatedContent()
-//		DemoAnimateFloatAsState2()
-//		DemoAnimateContentSize2()
-//		DemoCrossfade()
-//		DemoAnimatedContentSizeTransForm()
-//		DemoAnimatedContentTransitionSpec()
-//		DemoAnimateContent()
-//		DemoTransitionAnimate()
-//		DemoAnimatedVisibilityChildren()
-//		DemoMutableTransitionState()
-//		DemoAnimatedVisibility2()
-//		DemoUpdateTransition()
-//		DemoConcurrentAnimation()
-//		DemoSequentialAnimation()
-//		DemoLaunchAnimation()
-//		DemoRememberInfiniteTransition()
-//		DemoEnterExitTransition()
-//		DemoAnimatedContent()
-//		DemoAnimateColor()
-//		DemoTextMotion()
-//		DemoAnimateDpAsStateForElevation()
-//		DemoAnimateDpAsStateForPadding()
-//		DemoAnimateLayout()
-//		DemoAnimateIntOffsetAsState()
-//		DemoAnimateContentSize()
-//		DemoAnimateColorAsState()
-//		DemoAnimateFloatAsState()
-//		DemoAnimatedVisibility()
+//		DemoAnimateAppearing()
+//		DemoAnimateBackgroundColor()
+//		DemoAnimateSize()
+//		DemoAnimatePosition()
+//		DemoAnimatePositionWithLayout()
+//		DemoAnimatePadding()
+//		DemoAnimateElevation()
+//		DemoAnimateText()
+		DemoAnimateTextColor()
+	}
+}
+
+@Composable
+private fun DemoAnimateTextColor(){
+	val infiniteTransition = rememberInfiniteTransition(
+		label = "infinite transition"
+	)
+	val animatedColor by infiniteTransition.animateColor(
+		initialValue = Color.Red,
+		targetValue = Color.Blue,
+		animationSpec = infiniteRepeatable(tween(1000), RepeatMode.Reverse),
+		label = "color"
+	)
+	Box(
+		modifier = Modifier.fillMaxSize()
+	){
+		BasicText(
+			text = "Hello Compose",
+			color = {
+				animatedColor
+			}
+		)
+	}
+}
+
+@Composable
+private fun DemoAnimateText(){
+	val infiniteTransition = rememberInfiniteTransition(
+		label = "infinite transition"
+	)
+	val scale by infiniteTransition.animateFloat(
+		initialValue = 1f,
+		targetValue = 8f,
+		animationSpec = infiniteRepeatable(tween(1000), RepeatMode.Reverse),
+		label = "scale"
+	)
+	Box(
+		modifier = Modifier.fillMaxSize()
+	){
+		Text(
+			text = "Hello",
+			modifier = Modifier
+				.graphicsLayer {
+					scaleX = scale
+					scaleY = scale
+					transformOrigin = TransformOrigin.Center
+				}
+				.align(Alignment.Center),
+			style = LocalTextStyle.current.copy(textMotion = TextMotion.Animated)
+		)
+	}
+}
+
+@Composable
+private fun DemoAnimateElevation(){
+	val mutableInteractionSource = remember {
+		MutableInteractionSource()
+	}
+	val pressed = mutableInteractionSource.collectIsPressedAsState()
+	val elevation = animateDpAsState(
+		targetValue = if (pressed.value) {
+			32.dp
+		} else {
+			8.dp
+		},
+		label = "elevation"
+	)
+	Box {
+		Box(
+			modifier = Modifier
+				.size(100.dp)
+				.align(Alignment.Center)
+				.graphicsLayer {
+					this.shadowElevation = elevation.value.toPx()
+				}
+				.clickable(
+					interactionSource = mutableInteractionSource,
+					indication = null
+				) {}
+				.background(Color.Green)
+		)
+	}
+
+}
+
+@Composable
+private fun DemoAnimatePadding(){
+	var toggled by remember {
+		mutableStateOf(false)
+	}
+	val animatedPadding by animateDpAsState(
+		targetValue = if (toggled){
+			0.dp
+		}else{
+			20.dp
+		},
+		label = "padding"
+	)
+	Box(
+		modifier = Modifier
+			.aspectRatio(1f)
+			.fillMaxSize()
+			.padding(animatedPadding)
+			.background(Color.Red)
+			.clickable(
+				interactionSource = remember { MutableInteractionSource() },
+				indication = null
+			) {
+				toggled = !toggled
+			}
+	)
+}
+
+@Composable
+private fun DemoAnimatePositionWithLayout(){
+	val isLookingAhead  = false
+	var toggled by remember {
+		mutableStateOf(false)
+	}
+	val interactionSource = remember {
+		MutableInteractionSource()
+	}
+	Column(
+		modifier = Modifier
+			.padding(16.dp)
+			.fillMaxSize()
+			.clickable(
+				indication = null,
+				interactionSource = interactionSource
+			) {
+				toggled = !toggled
+			}
+	) {
+		val offsetTarget = if (toggled){
+			IntOffset(150, 150)
+		} else{
+			IntOffset.Zero
+		}
+		val offset = animateIntOffsetAsState(
+			targetValue = offsetTarget,
+			label = "offset"
+		)
+		Box(
+			modifier = Modifier
+				.size(100.dp)
+				.background(Color.Blue)
+		)
+		Box(
+			modifier = Modifier
+				.layout { measurable, constraints ->
+					val offsetValue = if (isLookingAhead) offsetTarget else offset.value
+					val placeable = measurable.measure(constraints)
+					layout(placeable.width + offsetValue.x, placeable.height + offsetValue.y) {
+						placeable.placeRelative(offsetValue)
+					}
+				}
+				.size(100.dp)
+				.background(Color.Green)
+		)
+		Box(
+			modifier = Modifier
+				.size(100.dp)
+				.background(Color.Blue)
+		)
+	}
+}
+
+@Composable
+private fun DemoAnimatePosition(){
+	var moved by remember{
+		mutableStateOf(false)
+	}
+	val pxToMove = with(LocalDensity.current){
+		100.dp.toPx().roundToInt()
+	}
+	val offset by animateIntOffsetAsState(
+		targetValue = if (moved){
+			IntOffset(pxToMove, pxToMove)
+		} else {
+			IntOffset.Zero
+		},
+		label = "offset"
+	)
+	Box(
+		modifier = Modifier
+			.offset {
+				offset
+			}
+			.background(Color.Blue)
+			.size(100.dp)
+			.clickable(
+				interactionSource = remember { MutableInteractionSource() },
+				indication = null
+			) {
+				moved = !moved
+			}
+	)
+}
+
+@Composable
+private fun DemoAnimateSize(){
+	var expanded by remember {
+		mutableStateOf(false)
+	}
+	Column {
+		Box(
+			modifier = Modifier
+				.background(Color.Blue)
+				.animateContentSize()
+				.height(if (expanded) 400.dp else 200.dp)
+				.width(if (expanded) 400.dp else 200.dp)
+				.clickable(
+					interactionSource = remember { MutableInteractionSource() },
+					indication = null
+				) {
+					expanded = !expanded
+				}
+		)
+		Button(onClick = { expanded = !expanded }) {
+			Text("크기 변경 하기")
+		}
+	}
+}
+
+@Composable
+private fun DemoAnimateBackgroundColor(){
+	var animateBackgroundColor by remember{
+		mutableStateOf(true)
+	}
+	val animatedColor by animateColorAsState(
+		targetValue = if(animateBackgroundColor) Color.Green else Color.Yellow,
+		label = "color"
+	)
+	Column(
+		modifier = Modifier
+			.fillMaxSize()
+			.drawBehind {
+				drawRect(animatedColor)
+			},
+		horizontalAlignment = Alignment.CenterHorizontally,
+		verticalArrangement = Arrangement.Center,
+	) {
+		Button(onClick = { animateBackgroundColor = !animateBackgroundColor }) {
+			Text("배경색 바꾸기")
+		}
+	}
+}
+
+@Composable
+private fun DemoAnimateAppearing(){
+	var visible by remember{
+		mutableStateOf(true)
+	}
+	var visible2 by remember{
+		mutableStateOf(true)
+	}
+	val animatedAlpha by animateFloatAsState(
+		targetValue = if(visible2) 1.0f else 0f,
+		label = "alpha"
+	)
+	Column {
+		Row(
+			modifier = Modifier.fillMaxWidth(),
+			horizontalArrangement = Arrangement.SpaceBetween
+		){
+			AnimatedVisibility(visible = visible) {
+				Box(
+					modifier = Modifier
+						.size(100.dp)
+						.background(Color.Yellow)
+				)
+			}
+			Box(
+				modifier = Modifier
+					.size(100.dp)
+					.graphicsLayer {
+						alpha = animatedAlpha
+					}
+					.background(Color.Green)
+			)
+		}
+		Row{
+			Button(onClick = { visible = !visible }) {
+				Text("AnimatedVisibility 테스트")
+			}
+			Button(onClick = { visible2 = !visible2 }) {
+				Text("animatedFloateAsState 테스트")
+			}
+		}
+	}
+}
+
+@Composable
+private fun DemoAnimateFloatAsState3(){
+	var visible by remember{
+		mutableStateOf(true)
+	}
+	val animatedAlpha by animateFloatAsState(
+		targetValue = if(visible) 1.0f else 0f,
+		label = "alpha"
+	)
+	Box{
+		Box(
+			modifier = Modifier
+				.size(200.dp)
+				.graphicsLayer {
+					alpha = animatedAlpha
+				}
+				.clip(RoundedCornerShape(8.dp))
+				.background(Color.Green)
+				.align(Alignment.TopCenter)
+		)
+		Button(
+			onClick = {
+				visible = !visible
+			},
+			modifier = Modifier
+				.align(Alignment.BottomCenter)
+		) {
+			Text(
+				if(visible)
+					"hide"
+				else
+					"show"
+			)
+		}
+	}
+}
+
+@Composable
+private fun DemoAnimatedVisibility3(){
+	var visible by remember {
+		mutableStateOf(true)
+	}
+	Column(
+		horizontalAlignment = Alignment.CenterHorizontally
+	) {
+		AnimatedVisibility(
+			visible = visible
+		) {
+			Box(
+				modifier = Modifier
+					.size(100.dp)
+					.background(Color.Yellow)
+			)
+		}
+		Button(onClick = {
+			visible = !visible
+		}) {
+			Text(text = if(visible) "숨기기" else "보여주기")
+		}
 	}
 }
 
@@ -219,7 +551,10 @@ private fun DemoRememberInfiniteTransition2(){
 			repeatMode = RepeatMode.Reverse
 		), label = ""
 	)
-	Box(Modifier.fillMaxSize().background(color))
+	Box(
+		Modifier
+			.fillMaxSize()
+			.background(color))
 }
 
 @Composable
