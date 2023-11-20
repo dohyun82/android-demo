@@ -12,6 +12,107 @@ import kotlin.math.*
 class CodingTestLevel0 {
 
 	/**
+	 * flag에 따라 다른 값 반환하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181933
+	 */
+	@Test
+	fun TestFlagResultValue(){
+		val a = -4
+		val b = 7
+		val flag = true
+		val result = flagResultValue(a, b, flag)
+		Assert.assertEquals( 3, result)
+	}
+
+	private fun flagResultValue(a: Int, b: Int, flag: Boolean): Int {
+		return if(flag){
+			a + b
+		}else{
+			a - b
+		}
+	}
+
+	/**
+	 * 조건 문자열
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181934
+	 */
+	@Test
+	fun TestConditionString(){
+		val ineq = "<"
+		val eq = "="
+		val n = 20
+		val m = 50
+		val result = conditionString(ineq, eq, n, m)
+		Assert.assertEquals(1, result)
+	}
+
+	private fun conditionString(ineq: String, eq: String, n: Int, m: Int): Int {
+		return when{
+			ineq == ">" && eq == "=" -> {
+				if(n>=m) 1 else 0
+			}
+			ineq == "<" && eq == "=" -> {
+				if(n<=m) 1 else 0
+			}
+			ineq == ">" && eq == "!" -> {
+				if(n>m) 1 else 0
+			}
+			ineq == "<" && eq == "!" -> {
+				if(n<m) 1 else 0
+			}
+			else -> 0
+		}
+	}
+
+	@Test
+	fun TestOddOrEven(){
+		val n = 10
+		val result = oddOrEven(n)
+		Assert.assertEquals(220, result)
+	}
+
+	private fun oddOrEven(n: Int): Int {
+		return if(n%2 !=0){
+			// n 이 홀수라면, n 이하의 홀수의 합
+			(1..n step 2).sum()
+		}else{
+			// n 이 짝수라면, n 이하의 짝수의 제곱의 합
+			(2..n step 2).sumOf {
+				it * it
+			}
+		}
+	}
+
+	@Test
+	fun TestCommonMultiple(){
+		val number = 60
+		val n = 2
+		val m = 3
+		val result = commmonMultiple(number, n, m)
+		Assert.assertEquals(1, result)
+	}
+
+	private fun commmonMultiple(number: Int, n: Int, m: Int): Int {
+		return if(number%n==0 && number%m==0) 1 else 0
+	}
+
+	/**
+	 * n의 배수
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181937
+	 */
+	@Test
+	fun TestMultipleN(){
+		val num = 98
+		val n = 2
+		val result = multipleN(num, n)
+		Assert.assertEquals(1, result)
+	}
+
+	private fun multipleN(num: Int, n: Int): Int {
+		return if(num%n==0) 1 else 0
+	}
+
+	/**
 	 * 두 수의 연산값 비교하기
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/181938
 	 */
