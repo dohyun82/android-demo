@@ -3,6 +3,7 @@ package kr.co.rkwkgo.androiddemo.view.compose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.animateColorAsState
@@ -16,7 +17,10 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -141,7 +145,78 @@ private fun AnimationBody(
 //		DemoAnimatePadding()
 //		DemoAnimateElevation()
 //		DemoAnimateTextStyle()
-		DemoAnimateTextColor()
+//		DemoAnimateTextColor()
+//		DemoSwitchDifferentContent()
+	}
+}
+
+
+enum class UIState{
+	Loading,
+	Loaded,
+	Error
+}
+
+@Composable
+private fun DemoSwitchDifferentContent(){
+	var state by remember{
+		mutableStateOf(UIState.Loading)
+	}
+	AnimatedContent(
+		targetState = state,
+		transitionSpec = {
+			fadeIn(
+				animationSpec = tween(3000)
+			) togetherWith fadeOut(animationSpec = tween(3000))
+		},
+		modifier = Modifier.clickable(
+			interactionSource = remember { MutableInteractionSource() },
+			indication = null
+		) {
+			state = when(state){
+				UIState.Loading -> UIState.Loaded
+				UIState.Loaded -> UIState.Error
+				UIState.Error -> UIState.Loading
+			}
+		},
+		label = "Animated Content"
+	) {targetState ->
+		Box(
+			modifier = Modifier.fillMaxSize(),
+		){
+			when(targetState){
+				UIState.Loading -> {
+					Box(
+						modifier = Modifier.size(100.dp, 100.dp).background(Color.Blue).align(
+							Alignment.Center),
+						contentAlignment = Alignment.Center
+					){
+						Text("로딩중",
+							color = Color.White)
+					}
+				}
+				UIState.Loaded -> {
+					Box(
+						modifier = Modifier.size(300.dp, 300.dp).background(Color.Green).align(
+							Alignment.BottomCenter),
+						contentAlignment = Alignment.Center
+					){
+						Text("완료",
+							color = Color.White)
+					}
+				}
+				UIState.Error -> {
+					Box(
+						modifier = Modifier.size(200.dp, 200.dp).background(Color.Red).align(
+							Alignment.TopCenter),
+						contentAlignment = Alignment.Center
+					){
+						Text("에러",
+							color = Color.White)
+					}
+				}
+			}
+		}
 	}
 }
 
