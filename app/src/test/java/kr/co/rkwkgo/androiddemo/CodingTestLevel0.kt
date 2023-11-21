@@ -12,6 +12,46 @@ import kotlin.math.*
 class CodingTestLevel0 {
 
 	/**
+	 * 코드 처리하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181932
+	 */
+	@Test
+	fun TestHandlingCode(){
+		val code = "abc1abc1abc"
+		val result = handlingCode(code)
+		Assert.assertEquals("acbac", result)
+	}
+
+	private fun handlingCode(code: String): String {
+		val sb = StringBuffer()
+		var mode = false
+		code.forEachIndexed { index, c ->
+			if(mode){
+				if(c!='1'){
+					if(index%2!=0){
+						sb.append(c)
+					}
+				}else{
+					mode = !mode
+				}
+			}else{
+				if(c!='1'){
+					if(index%2==0){
+						sb.append(c)
+					}
+				}else{
+					mode = !mode
+				}
+			}
+		}
+		var ret = sb.toString()
+		if(ret == ""){
+			ret = "EMPTY"
+		}
+		return ret
+	}
+
+	/**
 	 * flag에 따라 다른 값 반환하기
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/181933
 	 */
