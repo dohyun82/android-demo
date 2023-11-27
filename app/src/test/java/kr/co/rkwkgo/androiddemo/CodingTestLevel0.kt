@@ -9,7 +9,28 @@ import kotlin.math.*
  * https://school.programmers.co.kr
  * Level 0
  */
-class CodingTestLevel0 {
+class CodingTestLevel0{
+
+	/**
+	 * 등차수열의 특정한 항만 더하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181931
+	 */
+	@Test
+	fun TestAddingSpecificTermsArithmeticSequence(){
+		val a = 7
+		val d = 1
+		val included = booleanArrayOf(false, false, false, true, false, false, false)
+		val result = addingSpecificTermsArithmeticSequence(a, d, included)
+		Assert.assertEquals(10, result)
+	}
+
+	private fun addingSpecificTermsArithmeticSequence(a: Int, d: Int, included: BooleanArray): Int {
+		return included.indices.filter {
+			included[it]
+		}.sumOf {
+			a + d * it
+		}
+	}
 
 	/**
 	 * 코드 처리하기
