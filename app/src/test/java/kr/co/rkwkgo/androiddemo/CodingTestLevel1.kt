@@ -10,6 +10,38 @@ import org.junit.Test
 class CodingTestLevel1{
 
 	/**
+	 * 카드 뭉치
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/159994
+	 */
+	@Test
+	fun packOfCards(){
+		val cards1 = arrayOf("i", "water", "drink")
+		val cards2 = arrayOf("want", "to")
+		val goal = arrayOf("i", "want", "to", "drink", "water")
+		val result = packOfCards(cards1, cards2, goal)
+		Assert.assertEquals("No", result)
+	}
+
+	private fun packOfCards(cards1: Array<String>, cards2: Array<String>, goal: Array<String>): String {
+		var cards1Idx = 0
+		var cards2Idx = 0
+		goal.forEach {
+			when{
+				cards1.size > cards1Idx && it == cards1[cards1Idx] -> {
+					cards1Idx++
+				}
+				cards2.size > cards2Idx && it == cards2[cards2Idx] -> {
+					cards2Idx++
+				}
+				else -> {
+					return "No"
+				}
+			}
+		}
+		return "Yes"
+	}
+
+	/**
 	 * 푸드 파이트 대회
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/134240
 	 */
