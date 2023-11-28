@@ -12,6 +12,41 @@ import kotlin.math.*
 class CodingTestLevel0{
 
 	/**
+	 * 카운트 업
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181920
+	 */
+	@Test
+	fun countUp(){
+		val start_num = 3
+		val end_num = 10
+		val result = countUp(start_num, end_num)
+		Assert.assertArrayEquals(intArrayOf(3, 4, 5, 6, 7, 8, 9, 10), result)
+	}
+
+	private fun countUp(start_num: Int, end_num: Int): IntArray {
+		val list = mutableListOf<Int>()
+		(start_num .. end_num).forEach {
+			list.add(it)
+		}
+		return list.toIntArray()
+	}
+
+	/**
+	 * 문자열을 정수로 변환하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181848
+	 */
+	@Test
+	fun convertStringToInteger(){
+		val n_str = "10"
+		val result = convertStringToInteger(n_str)
+		Assert.assertEquals(10, result)
+	}
+
+	private fun convertStringToInteger(n_str: String): Int {
+		return n_str.toInt()
+	}
+
+	/**
 	 * 등차수열의 특정한 항만 더하기
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/181931
 	 */

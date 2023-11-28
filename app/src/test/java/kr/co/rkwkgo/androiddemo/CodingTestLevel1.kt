@@ -17,11 +17,11 @@ class CodingTestLevel1{
 	fun hallOfFame1(){
 		val k = 3
 		val source = intArrayOf(10, 100, 20, 150, 1, 100, 200)
-		val result = hallOfFame2(k, source)
+		val result = hallOfFame1(k, source)
 		Assert.assertArrayEquals(intArrayOf(10, 10, 10, 20, 20, 100, 100), result)
 	}
 
-	fun hallOfFame2(k: Int, score: IntArray): IntArray {
+	fun hallOfFame1(k: Int, score: IntArray): IntArray {
 		val list = mutableListOf<Int>()
 		val result = mutableListOf<Int>()
 		score.forEach {
