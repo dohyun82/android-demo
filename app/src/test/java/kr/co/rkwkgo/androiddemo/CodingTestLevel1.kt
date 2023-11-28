@@ -10,6 +10,32 @@ import org.junit.Test
 class CodingTestLevel1{
 
 	/**
+	 * 명예의 전당
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/138477
+	 */
+	@Test
+	fun hallOfFame1(){
+		val k = 3
+		val source = intArrayOf(10, 100, 20, 150, 1, 100, 200)
+		val result = hallOfFame2(k, source)
+		Assert.assertArrayEquals(intArrayOf(10, 10, 10, 20, 20, 100, 100), result)
+	}
+
+	fun hallOfFame2(k: Int, score: IntArray): IntArray {
+		val list = mutableListOf<Int>()
+		val result = mutableListOf<Int>()
+		score.forEach {
+			list.add(it)
+			list.sortDescending()
+			if(list.size>k){
+				list.removeLast()
+			}
+			result.add(list.last())
+		}
+		return result.toIntArray()
+	}
+
+	/**
 	 * 카드 뭉치
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/159994
 	 */
