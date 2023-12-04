@@ -2,12 +2,119 @@ package kr.co.rkwkgo.androiddemo
 
 import org.junit.Assert
 import org.junit.Test
+import kotlin.math.max
 
 /**
  * https://school.programmers.co.kr
  * Level 1
  */
 class CodingTestLevel1{
+
+	/**
+	 * 소수 만들기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/12977
+	 */
+	@Test
+	fun makePrimeNumbers(){
+		val nums = intArrayOf(1,2,3,4)
+		val result = makePrimeNumbers(nums)
+		Assert.assertEquals(1, result)
+	}
+
+	private fun makePrimeNumbers(nums: IntArray): Int {
+		val numList = nums.sorted()
+		val list = mutableListOf<Int>()
+		for(i in (0 until numList.size-2)){
+			for(j in (1 until numList.size-1)){
+				for(k in (2 until numList.size)){
+					val sum = numList[i] + numList[j] + numList[k]
+					if(!list.contains(sum)){
+						list.add(sum)
+					}
+				}
+			}
+		}
+		val result = mutableListOf<Int>()
+		for(item in list) {
+			var isPrime = true
+			for (i in 2 until item){
+				if(item % i == 0){
+					isPrime = false
+				}
+			}
+			if(isPrime){
+				result.add(item)
+			}
+		}
+		return result.count()
+	}
+
+	/**
+	 * 모의고사
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/42840
+	 */
+	@Test
+	fun mockExam(){
+		val answers = intArrayOf(1,3,2,4,2)
+		val result = mockExam(answers)
+		Assert.assertArrayEquals(intArrayOf(1,2,3), result)
+	}
+
+	private fun mockExam(answers: IntArray): IntArray {
+		val temp1 = intArrayOf(1,2,3,4,5)
+		val temp2 = intArrayOf(2,1,2,3,2,4,2,5)
+		val temp3 = intArrayOf(3,3,1,1,2,2,4,4,5,5)
+
+		var count1 = 0
+		var count2 = 0
+		var count3 = 0
+		answers.forEachIndexed { index, i ->
+			if(temp1[index%temp1.size] == i){
+				count1++
+			}
+			if(temp2[index%temp2.size] == i){
+				count2++
+			}
+			if(temp3[index%temp3.size] == i){
+				count3++
+			}
+		}
+		val max = mutableListOf(count1, count2, count3).maxOf { it }
+		val result = mutableListOf<Int>()
+		if(max==count1){
+			result.add(1)
+		}
+		if(max==count2){
+			result.add(2)
+		}
+		if(max==count3){
+			result.add(3)
+		}
+		return result.toIntArray()
+	}
+
+	/**
+	 * 과일 장수
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/135808
+	 */
+	@Test
+	fun fruiterer(){
+		val k = 3
+		val m = 4
+		val score = intArrayOf(1, 2, 3, 1, 2, 3, 1)
+		val result = fruiterer(k, m, score)
+		Assert.assertEquals(8, result)
+	}
+
+	private fun fruiterer(k: Int, m: Int, score: IntArray): Int {
+		var sum = 0
+		score.sortedDescending().forEachIndexed { index, i ->
+			if((index+1)%m==0){
+				sum += i * m
+			}
+		}
+		return sum
+	}
 
 	/**
 	 * 명예의 전당

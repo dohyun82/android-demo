@@ -12,6 +12,231 @@ import kotlin.math.*
 class CodingTestLevel0{
 
 	/**
+	 * 정수를 나선형으로 배치하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181832
+	 */
+	@Test
+	fun arrangeIntegersInSpiral(){
+		val n = 4
+		val result = arrangeIntegersInSpiral(n)
+		Assert.assertArrayEquals(
+			arrayOf(intArrayOf(1, 2, 3, 4), intArrayOf(12, 13, 14, 5), intArrayOf(11, 16, 15, 6), intArrayOf(10, 9, 8, 7)), result
+		)
+	}
+
+	private fun arrangeIntegersInSpiral(n: Int): Array<IntArray> {
+		val resultArray = Array(n){ IntArray(n) }
+		val direction = 1
+		(1 ..  (n*n)).forEach {
+
+		}
+		return resultArray
+	}
+
+	/**
+	 * 문자열 뒤의 n 글자
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181910
+	 */
+	@Test
+	fun lettersAfterString(){
+		val my_string = "ProgrammerS123"
+		val n = 11
+		val result = lettersAfterString(my_string, n)
+		Assert.assertEquals("grammerS123", result)
+	}
+
+	private fun lettersAfterString(my_string: String, n: Int): String {
+		return my_string.takeLast(n)
+	}
+
+	/**
+	 * 조건에 맞게 수열 변환하기 3
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181835
+	 */
+	@Test
+	fun convertingSequenceAccordingToConditions(){
+		val arr = intArrayOf(1, 2, 3, 100, 99, 98)
+		val k = 3
+		val result = convertingSequenceAccordingToConditions(arr, k)
+		Assert.assertArrayEquals(intArrayOf(3, 6, 9, 300, 297, 294), result)
+	}
+
+	private fun convertingSequenceAccordingToConditions(arr: IntArray, k: Int): IntArray {
+		return arr.map {
+			if(k%2==0){
+				it + k
+			}else{
+				it * k
+			}
+		}.toIntArray()
+	}
+
+	/**
+	 * 전국 대회 선발 고사
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181851
+	 */
+	@Test
+	fun nationalCompetitionSelectionTest(){
+		val rank = intArrayOf(3, 7, 2, 5, 4, 6, 1)
+		val attendance = booleanArrayOf(false, true, true, true, true, false, false)
+		val result = nationalCompetitionSelectionTest(rank, attendance)
+		Assert.assertEquals(20403, result)
+	}
+
+	private fun nationalCompetitionSelectionTest(rank: IntArray, attendance: BooleanArray): Int {
+		// 1. rank.size 만큰 반복
+		// 2. rank[idx] == idx+1 && attendance[idx] == true 라면 list 에 add
+		val list = mutableListOf<Int>()
+		run temp2@{
+			rank.forEachIndexed { idx, i ->
+				run temp@{
+					rank.forEachIndexed { idx2, it ->
+						if(it == idx+1){
+							if(attendance[idx2]){
+								list.add(idx2)
+								if(list.size>2){
+									return@temp2
+								}else{
+									return@temp
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return list[0] * 10000 + list[1] * 100 + list[2]
+	}
+
+	/**
+	 * 배열 만들기 2
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181921
+	 */
+	@Test
+	fun makeArray2(){
+		val l = 5
+		val r = 555
+		val result = makeArray2(l, r)
+		Assert.assertArrayEquals(intArrayOf(5,50,55,500,505,550,555), result)
+	}
+
+	private fun makeArray2(l: Int, r: Int): IntArray {
+		var result = (l .. r).filter {
+			"$it".replace("0","").replace("5","").isEmpty()
+		}.toIntArray()
+		if(result.isEmpty()){
+			result = intArrayOf(-1)
+		}
+		return result
+	}
+
+	/**
+	 * 배열 조각하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181893
+	 */
+	@Test
+	fun sculptingArray(){
+		val arr = intArrayOf(0, 1, 2, 3, 4, 5)
+		val query = intArrayOf(4, 1, 2)
+		val result = sculptingArray(arr, query)
+		Assert.assertArrayEquals(intArrayOf(1,2,3), result)
+	}
+
+	private fun sculptingArray(arr: IntArray, query: IntArray): IntArray {
+		var list = arr.toMutableList()
+		query.forEachIndexed { index, i ->
+			list = if(index%2==0){
+				list.take(i + 1).toMutableList()
+			}else{
+				list.takeLast(list.size - i).toMutableList()
+			}
+	}
+		return list.toIntArray()
+	}
+
+	/**
+	 * 정수 부분
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181850
+	 */
+	@Test
+	fun integerPart(){
+		val flo = 1.42
+		val result = integerPart(flo)
+		Assert.assertEquals(1, result)
+	}
+
+	private fun integerPart(flo: Double): Int {
+		return flo.toInt()
+	}
+
+	@Test
+	fun sequenceIntervalQueries2(){
+		val arr = intArrayOf(0, 1, 2, 4, 3)
+		val queries = arrayOf(intArrayOf(0, 4, 2), intArrayOf(0, 3, 2), intArrayOf(0, 2, 2))
+		val result = sequenceIntervalQueries2(arr, queries)
+		Assert.assertArrayEquals(intArrayOf(3, 4, -1), result)
+	}
+
+	private fun sequenceIntervalQueries2(arr: IntArray, queries: Array<IntArray>): IntArray {
+		val list = mutableListOf<Int>()
+		queries.forEach {
+			var temp = (it[0]..it[1]).map { it2 ->
+				arr[it2]
+			}.sorted().firstOrNull {it3 ->
+				it3>it[2]
+			}
+			if(temp == null){
+				temp = -1
+			}
+			list.add(temp)
+		}
+		return list.toIntArray()
+	}
+
+
+	/**
+	 * 마지막 두 원소
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181927
+	 */
+	@Test
+	fun lastTwoElements(){
+		val num_list = intArrayOf(2, 1, 6)
+		val result = lastTwoElements(num_list)
+		Assert.assertArrayEquals(intArrayOf(2, 1, 6, 5), result)
+	}
+
+	private fun lastTwoElements(num_list: IntArray): IntArray {
+		val tempList = num_list.toMutableList()
+		val one = num_list[num_list.size-1]
+		val two = num_list[num_list.size-2]
+		if(one>two){
+			tempList.add(one - two)
+		}else{
+			tempList.add(one * 2)
+		}
+		return tempList.toIntArray()
+	}
+
+	/**
+	 * 정수 찾기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181840
+	 */
+	@Test
+	fun findInteger(){
+		val num_list = intArrayOf(1, 2, 3, 4, 5)
+		val n = 3
+		val result = findInteger(num_list, n)
+		Assert.assertEquals(1, result)
+	}
+
+	private fun findInteger(num_list: IntArray, n: Int): Int {
+		val num = num_list.find {
+			it == n
+		}
+		return if(num == null) 0 else 1
+	}
+
+	/**
 	 * 카운트 업
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/181920
 	 */
