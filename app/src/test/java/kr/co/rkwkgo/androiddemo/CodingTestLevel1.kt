@@ -3,6 +3,7 @@ package kr.co.rkwkgo.androiddemo
 import org.junit.Assert
 import org.junit.Test
 import kotlin.math.max
+import kotlin.math.sqrt
 
 /**
  * https://school.programmers.co.kr
@@ -16,9 +17,9 @@ class CodingTestLevel1{
 	 */
 	@Test
 	fun makePrimeNumbers(){
-		val nums = intArrayOf(1,2,3,4)
+		val nums = intArrayOf(1, 2, 4, 5, 8)
 		val result = makePrimeNumbers(nums)
-		Assert.assertEquals(1, result)
+		Assert.assertEquals(5, result)
 	}
 
 	private fun makePrimeNumbers(nums: IntArray): Int {
@@ -28,25 +29,36 @@ class CodingTestLevel1{
 			for(j in (1 until numList.size-1)){
 				for(k in (2 until numList.size)){
 					val sum = numList[i] + numList[j] + numList[k]
-					if(!list.contains(sum)){
-						list.add(sum)
+					if(numList[i]!=numList[j] && numList[j]!=numList[k] && numList[k]!=numList[i]){
+						println("${numList[i]} ${numList[j]} ${numList[k]} = $sum")
+						if(numList[i]<numList[j] && numList[j]<numList[k]){
+							if(isPrime2(sum)){
+								list.add(sum)
+							}
+						}
 					}
 				}
 			}
 		}
-		val result = mutableListOf<Int>()
-		for(item in list) {
-			var isPrime = true
-			for (i in 2 until item){
-				if(item % i == 0){
-					isPrime = false
-				}
-			}
-			if(isPrime){
-				result.add(item)
+		return list.count()
+	}
+
+	/**
+	 * 소수인지 판별하기
+	 */
+	private fun isPrime(num: Int): Boolean{
+		for(i in 2 until num){
+			if(num%i == 0){
+				return false
 			}
 		}
-		return result.count()
+		return true
+	}
+	private fun isPrime2(num: Int): Boolean{
+		if(num <= 1) return false
+		return (2..sqrt(num.toDouble()).toInt()).none{
+			num % it == 0
+		}
 	}
 
 	/**
