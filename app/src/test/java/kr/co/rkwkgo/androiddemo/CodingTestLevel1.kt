@@ -2,7 +2,6 @@ package kr.co.rkwkgo.androiddemo
 
 import org.junit.Assert
 import org.junit.Test
-import kotlin.math.max
 import kotlin.math.sqrt
 
 /**
@@ -10,6 +9,38 @@ import kotlin.math.sqrt
  * Level 1
  */
 class CodingTestLevel1{
+
+	/**
+	 * 기사단원의 무기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/136798
+	 */
+	@Test
+	fun weaponOfTemplar(){
+		val number = 5
+		val limit = 3
+		val power = 2
+		val result = weaponOfTemplar(number, limit, power)
+		Assert.assertEquals(10, result)
+	}
+
+	private fun weaponOfTemplar(number: Int, limit: Int, power: Int): Int {
+		return (1 .. number).sumOf {
+			var count = 0
+			for(i in 1 .. sqrt(it.toDouble()).toInt()){
+				if(it % i == 0){
+					count++
+					if(it / i != i){
+						count++
+					}
+				}
+			}
+			if (count <= limit) {
+				count
+			} else {
+				power
+			}
+		}
+	}
 
 	/**
 	 * 소수 만들기
@@ -30,7 +61,6 @@ class CodingTestLevel1{
 				for(k in (2 until numList.size)){
 					val sum = numList[i] + numList[j] + numList[k]
 					if(numList[i]!=numList[j] && numList[j]!=numList[k] && numList[k]!=numList[i]){
-						println("${numList[i]} ${numList[j]} ${numList[k]} = $sum")
 						if(numList[i]<numList[j] && numList[j]<numList[k]){
 							if(isPrime2(sum)){
 								list.add(sum)
