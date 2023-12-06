@@ -12,6 +12,41 @@ import kotlin.math.*
 class CodingTestLevel0{
 
 	/**
+	 * 글자 이어 붙여 문자열 만들기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181915
+	 */
+	@Test
+	fun createStringByConcatenatingLetters(){
+		val my_string = "cvsgiorszzzmrpaqpe"
+		val index_list = intArrayOf(16, 6, 5, 3, 12, 14, 11, 11, 17, 12, 7)
+		val result = createStringByConcatenatingLetters(my_string, index_list)
+		Assert.assertEquals("programmers", result)
+	}
+
+	private fun createStringByConcatenatingLetters(my_string: String, index_list: IntArray): String {
+		return index_list.map {
+			my_string[it]
+		}.joinToString("")
+	}
+
+	/**
+	 * 첫 번째로 나오는 음수
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181896
+	 */
+	@Test
+	fun firstNegativeNumber(){
+		val num_list = intArrayOf(12, 4, 15, 46, 38, -2, 15)
+		val result = firstNegativeNumber(num_list)
+		Assert.assertEquals(5, result)
+	}
+
+	private fun firstNegativeNumber(num_list: IntArray): Int {
+		return num_list.indexOfFirst {
+			it<0
+		}
+	}
+
+	/**
 	 * 정수를 나선형으로 배치하기
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/181832
 	 */

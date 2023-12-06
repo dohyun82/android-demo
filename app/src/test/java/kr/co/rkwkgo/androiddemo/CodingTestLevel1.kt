@@ -11,6 +11,66 @@ import kotlin.math.sqrt
 class CodingTestLevel1{
 
 	/**
+	 * 실패율
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/42889
+	 */
+	@Test
+	fun failureRate(){
+		val N = 5
+		val stages = intArrayOf(2, 1, 2, 6, 2, 4, 3, 3)
+		val result = failureRate(N, stages)
+		Assert.assertArrayEquals(intArrayOf(3,4,2,1,5), result)
+	}
+
+	private fun failureRate(N: Int, stages: IntArray): IntArray {
+		// 1. stages 를 MutableList 로 형변환
+		val list = stages.toMutableList()
+		// 2. N 만큼 반복해서 stage 별 실패율 구하기
+		val result = (1..N).mapIndexed { index, i ->
+			val originCount = list.size
+			list.removeIf { it2 ->
+				it2 == i
+			}
+			(index+1 to (originCount - list.size) / originCount.toFloat())
+		}
+		return result.sortedBy {
+			-it.second
+		}.map {
+			it.first
+		}.toIntArray()
+	}
+
+	/**
+	 * 덧칠하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/161989
+	 */
+	@Test
+	fun applyMorePaint(){
+		val n = 5
+		val m = 2
+		val section = intArrayOf(1,4,5)
+		val result = applyMorePaint(n, m, section)
+		Assert.assertEquals(2, result)
+	}
+
+	private fun applyMorePaint(n: Int, m: Int, section: IntArray): Int {
+		var result = 0
+		var max = 0
+		for(i in section[0] .. section[section.lastIndex]){
+			if(i > max){
+				val count = section.count {
+					it == i
+				}
+				if(count>0){
+					result++
+					max = i + m -1
+				}
+			}
+		}
+		return result
+	}
+
+	/**
 	 * 기사단원의 무기
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/136798
 	 */
