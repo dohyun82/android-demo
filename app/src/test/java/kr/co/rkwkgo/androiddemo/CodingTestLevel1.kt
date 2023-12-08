@@ -11,6 +11,68 @@ import kotlin.math.sqrt
 class CodingTestLevel1{
 
 	/**
+	 * 로또의 최고 순위와 최저 순위
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/77484
+	 */
+	@Test
+	fun highestAndLowestLottoRankings(){
+		val lottos = intArrayOf(44, 1, 0, 0, 31, 25)
+		val win_nums = intArrayOf(31, 10, 45, 1, 6, 19)
+		val result = highestAndLowestLottoRankings(lottos, win_nums)
+		Assert.assertArrayEquals(intArrayOf(3,5), result)
+	}
+
+	private fun highestAndLowestLottoRankings(lottos: IntArray, win_nums: IntArray): IntArray {
+		val remainCount = lottos.count {
+			it == 0
+		}
+		val matchingCount = lottos.count {
+			win_nums.contains(it)
+		}
+		return intArrayOf(getLottoNumber(matchingCount + remainCount), getLottoNumber(matchingCount))
+	}
+
+	private fun getLottoNumber(matchingCount: Int): Int{
+		return when(matchingCount){
+			6 -> 1
+			5 -> 2
+			4 -> 3
+			3 -> 4
+			2 -> 5
+			else -> 6
+		}
+	}
+
+	/**
+	 * 옹알이
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/133499
+	 */
+	@Test
+	fun babbling(){
+		val babbling = arrayOf("ayamayaa")
+		val result = babbling(babbling)
+		Assert.assertEquals(0, result)
+	}
+
+	private fun babbling(babbling: Array<String>): Int {
+		// 1. babbling 배열을 반복
+		// 2. 미리 정의 된 네 가지 조합으로 매칭되는 경우 카운트
+		// 3. 같은 글자가 연속된 경우는 카운트 안함
+		// 4. 카운트 갯수 반환
+		val array = arrayOf("aya", "ye", "woo", "ma")
+		return babbling.count {
+			var str = it
+			array.forEach { it2 ->
+				str = str.replace(it2, "*")
+				str = str.replace("**", "-")
+				str = str.replace("*", "+")
+			}
+			str = str.replace("+", "")
+			str.isEmpty()
+		}
+	}
+
+	/**
 	 * 실패율
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/42889
 	 */

@@ -12,6 +12,130 @@ import kotlin.math.*
 class CodingTestLevel0{
 
 	/**
+	 * 정수를 나선형으로 배치하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181832
+	 */
+	@Test
+	fun arrangeIntegersInSpiral(){
+		val n = 4
+		val result = arrangeIntegersInSpiral(n)
+		Assert.assertArrayEquals(
+			arrayOf(intArrayOf(1, 2, 3, 4), intArrayOf(12, 13, 14, 5), intArrayOf(11, 16, 15, 6), intArrayOf(10, 9, 8, 7)), result
+		)
+	}
+
+	private fun arrangeIntegersInSpiral(n: Int): Array<IntArray> {
+		val resultArray = Array(n){ IntArray(n) }
+		val direction = 1
+		(1 ..  (n*n)).forEach {
+
+		}
+		return resultArray
+	}
+
+
+	/**
+	 * 무작위로 k개의 수 뽑기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181858
+	 */
+	@Test
+	fun randomDrawKNumber(){
+		val arr = intArrayOf(0, 1, 1, 2, 2, 3)
+		val k = 3
+		val result = randomDrawKNumber(arr, k)
+		Assert.assertArrayEquals(intArrayOf(0,1,2), result)
+	}
+
+	private fun randomDrawKNumber(arr: IntArray, k: Int): IntArray {
+		val list = mutableListOf<Int>()
+		for(value in arr){
+			if(!list.contains(value)){
+				list.add(value)
+			}
+			if(list.size>=k){
+				break
+			}
+		}
+		val listSize = list.size
+		if(listSize<k){
+			val array = Array(k-listSize){-1}
+			list.addAll(array)
+		}
+		return list.toIntArray()
+	}
+
+	/**
+	 * 문자열로 변환
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181845
+	 */
+	@Test
+	fun convertString(){
+		val n = 123
+		val result = convertString(n)
+		Assert.assertEquals("123", result)
+	}
+
+	private fun convertString(n: Int): String {
+		return n.toString()
+	}
+
+
+	/**
+	 * n 번째 원소까지
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181889
+	 */
+	@Test
+	fun untilNthElement(){
+		val num_list = intArrayOf(2, 1, 6)
+		val n = 1
+		val result = untilNthElement(num_list, n)
+		Assert.assertArrayEquals(intArrayOf(2), result)
+	}
+
+	private fun untilNthElement(num_list: IntArray, n: Int): IntArray {
+		return num_list.sliceArray(0 until n)
+	}
+
+	/**
+	 * 길이에 따른 연산
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181879
+	 */
+	@Test
+	fun operationsBasedOnLength(){
+		val num_list = intArrayOf(3, 4, 5, 2, 5, 4, 6, 7, 3, 7, 2, 2, 1)
+		val result = operationsBasedOnLength(num_list)
+		Assert.assertEquals(51, result)
+	}
+
+	private fun operationsBasedOnLength(num_list: IntArray): Int {
+		var result = 1
+		if(num_list.size>10){
+			result = num_list.sum()
+		}else{
+			result = num_list.fold(1){ a,b ->
+				a*b
+			}
+		}
+		return result
+	}
+
+	/**
+	 * n 번째 원소부터
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181892
+	 */
+	@Test
+	fun fromNthElements(){
+		val num_list = intArrayOf(2, 1, 6)
+		val n = 3
+		val result = fromNthElements(num_list, n)
+		Assert.assertArrayEquals(intArrayOf(6), result)
+	}
+
+	private fun fromNthElements(num_list: IntArray, n: Int): IntArray {
+		return num_list.sliceArray(n-1 until num_list.size)
+	}
+
+	/**
 	 * 글자 이어 붙여 문자열 만들기
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/181915
 	 */
@@ -44,28 +168,6 @@ class CodingTestLevel0{
 		return num_list.indexOfFirst {
 			it<0
 		}
-	}
-
-	/**
-	 * 정수를 나선형으로 배치하기
-	 * https://school.programmers.co.kr/learn/courses/30/lessons/181832
-	 */
-	@Test
-	fun arrangeIntegersInSpiral(){
-		val n = 4
-		val result = arrangeIntegersInSpiral(n)
-		Assert.assertArrayEquals(
-			arrayOf(intArrayOf(1, 2, 3, 4), intArrayOf(12, 13, 14, 5), intArrayOf(11, 16, 15, 6), intArrayOf(10, 9, 8, 7)), result
-		)
-	}
-
-	private fun arrangeIntegersInSpiral(n: Int): Array<IntArray> {
-		val resultArray = Array(n){ IntArray(n) }
-		val direction = 1
-		(1 ..  (n*n)).forEach {
-
-		}
-		return resultArray
 	}
 
 	/**
