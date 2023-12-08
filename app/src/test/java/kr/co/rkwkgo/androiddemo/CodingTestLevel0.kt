@@ -9,7 +9,566 @@ import kotlin.math.*
  * https://school.programmers.co.kr
  * Level 0
  */
-class CodingTestLevel0 {
+class CodingTestLevel0{
+
+	/**
+	 * 정수를 나선형으로 배치하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181832
+	 */
+	@Test
+	fun arrangeIntegersInSpiral(){
+		val n = 4
+		val result = arrangeIntegersInSpiral(n)
+		Assert.assertArrayEquals(
+			arrayOf(intArrayOf(1, 2, 3, 4), intArrayOf(12, 13, 14, 5), intArrayOf(11, 16, 15, 6), intArrayOf(10, 9, 8, 7)), result
+		)
+	}
+
+	private fun arrangeIntegersInSpiral(n: Int): Array<IntArray> {
+		val resultArray = Array(n){ IntArray(n) }
+		val direction = 1
+		(1 ..  (n*n)).forEach {
+
+		}
+		return resultArray
+	}
+
+
+	/**
+	 * 무작위로 k개의 수 뽑기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181858
+	 */
+	@Test
+	fun randomDrawKNumber(){
+		val arr = intArrayOf(0, 1, 1, 2, 2, 3)
+		val k = 3
+		val result = randomDrawKNumber(arr, k)
+		Assert.assertArrayEquals(intArrayOf(0,1,2), result)
+	}
+
+	private fun randomDrawKNumber(arr: IntArray, k: Int): IntArray {
+		val list = mutableListOf<Int>()
+		for(value in arr){
+			if(!list.contains(value)){
+				list.add(value)
+			}
+			if(list.size>=k){
+				break
+			}
+		}
+		val listSize = list.size
+		if(listSize<k){
+			val array = Array(k-listSize){-1}
+			list.addAll(array)
+		}
+		return list.toIntArray()
+	}
+
+	/**
+	 * 문자열로 변환
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181845
+	 */
+	@Test
+	fun convertString(){
+		val n = 123
+		val result = convertString(n)
+		Assert.assertEquals("123", result)
+	}
+
+	private fun convertString(n: Int): String {
+		return n.toString()
+	}
+
+
+	/**
+	 * n 번째 원소까지
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181889
+	 */
+	@Test
+	fun untilNthElement(){
+		val num_list = intArrayOf(2, 1, 6)
+		val n = 1
+		val result = untilNthElement(num_list, n)
+		Assert.assertArrayEquals(intArrayOf(2), result)
+	}
+
+	private fun untilNthElement(num_list: IntArray, n: Int): IntArray {
+		return num_list.sliceArray(0 until n)
+	}
+
+	/**
+	 * 길이에 따른 연산
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181879
+	 */
+	@Test
+	fun operationsBasedOnLength(){
+		val num_list = intArrayOf(3, 4, 5, 2, 5, 4, 6, 7, 3, 7, 2, 2, 1)
+		val result = operationsBasedOnLength(num_list)
+		Assert.assertEquals(51, result)
+	}
+
+	private fun operationsBasedOnLength(num_list: IntArray): Int {
+		var result = 1
+		if(num_list.size>10){
+			result = num_list.sum()
+		}else{
+			result = num_list.fold(1){ a,b ->
+				a*b
+			}
+		}
+		return result
+	}
+
+	/**
+	 * n 번째 원소부터
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181892
+	 */
+	@Test
+	fun fromNthElements(){
+		val num_list = intArrayOf(2, 1, 6)
+		val n = 3
+		val result = fromNthElements(num_list, n)
+		Assert.assertArrayEquals(intArrayOf(6), result)
+	}
+
+	private fun fromNthElements(num_list: IntArray, n: Int): IntArray {
+		return num_list.sliceArray(n-1 until num_list.size)
+	}
+
+	/**
+	 * 글자 이어 붙여 문자열 만들기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181915
+	 */
+	@Test
+	fun createStringByConcatenatingLetters(){
+		val my_string = "cvsgiorszzzmrpaqpe"
+		val index_list = intArrayOf(16, 6, 5, 3, 12, 14, 11, 11, 17, 12, 7)
+		val result = createStringByConcatenatingLetters(my_string, index_list)
+		Assert.assertEquals("programmers", result)
+	}
+
+	private fun createStringByConcatenatingLetters(my_string: String, index_list: IntArray): String {
+		return index_list.map {
+			my_string[it]
+		}.joinToString("")
+	}
+
+	/**
+	 * 첫 번째로 나오는 음수
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181896
+	 */
+	@Test
+	fun firstNegativeNumber(){
+		val num_list = intArrayOf(12, 4, 15, 46, 38, -2, 15)
+		val result = firstNegativeNumber(num_list)
+		Assert.assertEquals(5, result)
+	}
+
+	private fun firstNegativeNumber(num_list: IntArray): Int {
+		return num_list.indexOfFirst {
+			it<0
+		}
+	}
+
+	/**
+	 * 문자열 뒤의 n 글자
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181910
+	 */
+	@Test
+	fun lettersAfterString(){
+		val my_string = "ProgrammerS123"
+		val n = 11
+		val result = lettersAfterString(my_string, n)
+		Assert.assertEquals("grammerS123", result)
+	}
+
+	private fun lettersAfterString(my_string: String, n: Int): String {
+		return my_string.takeLast(n)
+	}
+
+	/**
+	 * 조건에 맞게 수열 변환하기 3
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181835
+	 */
+	@Test
+	fun convertingSequenceAccordingToConditions(){
+		val arr = intArrayOf(1, 2, 3, 100, 99, 98)
+		val k = 3
+		val result = convertingSequenceAccordingToConditions(arr, k)
+		Assert.assertArrayEquals(intArrayOf(3, 6, 9, 300, 297, 294), result)
+	}
+
+	private fun convertingSequenceAccordingToConditions(arr: IntArray, k: Int): IntArray {
+		return arr.map {
+			if(k%2==0){
+				it + k
+			}else{
+				it * k
+			}
+		}.toIntArray()
+	}
+
+	/**
+	 * 전국 대회 선발 고사
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181851
+	 */
+	@Test
+	fun nationalCompetitionSelectionTest(){
+		val rank = intArrayOf(3, 7, 2, 5, 4, 6, 1)
+		val attendance = booleanArrayOf(false, true, true, true, true, false, false)
+		val result = nationalCompetitionSelectionTest(rank, attendance)
+		Assert.assertEquals(20403, result)
+	}
+
+	private fun nationalCompetitionSelectionTest(rank: IntArray, attendance: BooleanArray): Int {
+		// 1. rank.size 만큰 반복
+		// 2. rank[idx] == idx+1 && attendance[idx] == true 라면 list 에 add
+		val list = mutableListOf<Int>()
+		run temp2@{
+			rank.forEachIndexed { idx, i ->
+				run temp@{
+					rank.forEachIndexed { idx2, it ->
+						if(it == idx+1){
+							if(attendance[idx2]){
+								list.add(idx2)
+								if(list.size>2){
+									return@temp2
+								}else{
+									return@temp
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return list[0] * 10000 + list[1] * 100 + list[2]
+	}
+
+	/**
+	 * 배열 만들기 2
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181921
+	 */
+	@Test
+	fun makeArray2(){
+		val l = 5
+		val r = 555
+		val result = makeArray2(l, r)
+		Assert.assertArrayEquals(intArrayOf(5,50,55,500,505,550,555), result)
+	}
+
+	private fun makeArray2(l: Int, r: Int): IntArray {
+		var result = (l .. r).filter {
+			"$it".replace("0","").replace("5","").isEmpty()
+		}.toIntArray()
+		if(result.isEmpty()){
+			result = intArrayOf(-1)
+		}
+		return result
+	}
+
+	/**
+	 * 배열 조각하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181893
+	 */
+	@Test
+	fun sculptingArray(){
+		val arr = intArrayOf(0, 1, 2, 3, 4, 5)
+		val query = intArrayOf(4, 1, 2)
+		val result = sculptingArray(arr, query)
+		Assert.assertArrayEquals(intArrayOf(1,2,3), result)
+	}
+
+	private fun sculptingArray(arr: IntArray, query: IntArray): IntArray {
+		var list = arr.toMutableList()
+		query.forEachIndexed { index, i ->
+			list = if(index%2==0){
+				list.take(i + 1).toMutableList()
+			}else{
+				list.takeLast(list.size - i).toMutableList()
+			}
+	}
+		return list.toIntArray()
+	}
+
+	/**
+	 * 정수 부분
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181850
+	 */
+	@Test
+	fun integerPart(){
+		val flo = 1.42
+		val result = integerPart(flo)
+		Assert.assertEquals(1, result)
+	}
+
+	private fun integerPart(flo: Double): Int {
+		return flo.toInt()
+	}
+
+	@Test
+	fun sequenceIntervalQueries2(){
+		val arr = intArrayOf(0, 1, 2, 4, 3)
+		val queries = arrayOf(intArrayOf(0, 4, 2), intArrayOf(0, 3, 2), intArrayOf(0, 2, 2))
+		val result = sequenceIntervalQueries2(arr, queries)
+		Assert.assertArrayEquals(intArrayOf(3, 4, -1), result)
+	}
+
+	private fun sequenceIntervalQueries2(arr: IntArray, queries: Array<IntArray>): IntArray {
+		val list = mutableListOf<Int>()
+		queries.forEach {
+			var temp = (it[0]..it[1]).map { it2 ->
+				arr[it2]
+			}.sorted().firstOrNull {it3 ->
+				it3>it[2]
+			}
+			if(temp == null){
+				temp = -1
+			}
+			list.add(temp)
+		}
+		return list.toIntArray()
+	}
+
+
+	/**
+	 * 마지막 두 원소
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181927
+	 */
+	@Test
+	fun lastTwoElements(){
+		val num_list = intArrayOf(2, 1, 6)
+		val result = lastTwoElements(num_list)
+		Assert.assertArrayEquals(intArrayOf(2, 1, 6, 5), result)
+	}
+
+	private fun lastTwoElements(num_list: IntArray): IntArray {
+		val tempList = num_list.toMutableList()
+		val one = num_list[num_list.size-1]
+		val two = num_list[num_list.size-2]
+		if(one>two){
+			tempList.add(one - two)
+		}else{
+			tempList.add(one * 2)
+		}
+		return tempList.toIntArray()
+	}
+
+	/**
+	 * 정수 찾기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181840
+	 */
+	@Test
+	fun findInteger(){
+		val num_list = intArrayOf(1, 2, 3, 4, 5)
+		val n = 3
+		val result = findInteger(num_list, n)
+		Assert.assertEquals(1, result)
+	}
+
+	private fun findInteger(num_list: IntArray, n: Int): Int {
+		val num = num_list.find {
+			it == n
+		}
+		return if(num == null) 0 else 1
+	}
+
+	/**
+	 * 카운트 업
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181920
+	 */
+	@Test
+	fun countUp(){
+		val start_num = 3
+		val end_num = 10
+		val result = countUp(start_num, end_num)
+		Assert.assertArrayEquals(intArrayOf(3, 4, 5, 6, 7, 8, 9, 10), result)
+	}
+
+	private fun countUp(start_num: Int, end_num: Int): IntArray {
+		val list = mutableListOf<Int>()
+		(start_num .. end_num).forEach {
+			list.add(it)
+		}
+		return list.toIntArray()
+	}
+
+	/**
+	 * 문자열을 정수로 변환하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181848
+	 */
+	@Test
+	fun convertStringToInteger(){
+		val n_str = "10"
+		val result = convertStringToInteger(n_str)
+		Assert.assertEquals(10, result)
+	}
+
+	private fun convertStringToInteger(n_str: String): Int {
+		return n_str.toInt()
+	}
+
+	/**
+	 * 등차수열의 특정한 항만 더하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181931
+	 */
+	@Test
+	fun TestAddingSpecificTermsArithmeticSequence(){
+		val a = 7
+		val d = 1
+		val included = booleanArrayOf(false, false, false, true, false, false, false)
+		val result = addingSpecificTermsArithmeticSequence(a, d, included)
+		Assert.assertEquals(10, result)
+	}
+
+	private fun addingSpecificTermsArithmeticSequence(a: Int, d: Int, included: BooleanArray): Int {
+		return included.indices.filter {
+			included[it]
+		}.sumOf {
+			a + d * it
+		}
+	}
+
+	/**
+	 * 코드 처리하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181932
+	 */
+	@Test
+	fun TestHandlingCode(){
+		val code = "abc1abc1abc"
+		val result = handlingCode(code)
+		Assert.assertEquals("acbac", result)
+	}
+
+	private fun handlingCode(code: String): String {
+		val sb = StringBuffer()
+		var mode = false
+		code.forEachIndexed { index, c ->
+			if(mode){
+				if(c!='1'){
+					if(index%2!=0){
+						sb.append(c)
+					}
+				}else{
+					mode = !mode
+				}
+			}else{
+				if(c!='1'){
+					if(index%2==0){
+						sb.append(c)
+					}
+				}else{
+					mode = !mode
+				}
+			}
+		}
+		var ret = sb.toString()
+		if(ret == ""){
+			ret = "EMPTY"
+		}
+		return ret
+	}
+
+	/**
+	 * flag에 따라 다른 값 반환하기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181933
+	 */
+	@Test
+	fun TestFlagResultValue(){
+		val a = -4
+		val b = 7
+		val flag = true
+		val result = flagResultValue(a, b, flag)
+		Assert.assertEquals( 3, result)
+	}
+
+	private fun flagResultValue(a: Int, b: Int, flag: Boolean): Int {
+		return if(flag){
+			a + b
+		}else{
+			a - b
+		}
+	}
+
+	/**
+	 * 조건 문자열
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181934
+	 */
+	@Test
+	fun TestConditionString(){
+		val ineq = "<"
+		val eq = "="
+		val n = 20
+		val m = 50
+		val result = conditionString(ineq, eq, n, m)
+		Assert.assertEquals(1, result)
+	}
+
+	private fun conditionString(ineq: String, eq: String, n: Int, m: Int): Int {
+		return when{
+			ineq == ">" && eq == "=" -> {
+				if(n>=m) 1 else 0
+			}
+			ineq == "<" && eq == "=" -> {
+				if(n<=m) 1 else 0
+			}
+			ineq == ">" && eq == "!" -> {
+				if(n>m) 1 else 0
+			}
+			ineq == "<" && eq == "!" -> {
+				if(n<m) 1 else 0
+			}
+			else -> 0
+		}
+	}
+
+	@Test
+	fun TestOddOrEven(){
+		val n = 10
+		val result = oddOrEven(n)
+		Assert.assertEquals(220, result)
+	}
+
+	private fun oddOrEven(n: Int): Int {
+		return if(n%2 !=0){
+			// n 이 홀수라면, n 이하의 홀수의 합
+			(1..n step 2).sum()
+		}else{
+			// n 이 짝수라면, n 이하의 짝수의 제곱의 합
+			(2..n step 2).sumOf {
+				it * it
+			}
+		}
+	}
+
+	@Test
+	fun TestCommonMultiple(){
+		val number = 60
+		val n = 2
+		val m = 3
+		val result = commmonMultiple(number, n, m)
+		Assert.assertEquals(1, result)
+	}
+
+	private fun commmonMultiple(number: Int, n: Int, m: Int): Int {
+		return if(number%n==0 && number%m==0) 1 else 0
+	}
+
+	/**
+	 * n의 배수
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181937
+	 */
+	@Test
+	fun TestMultipleN(){
+		val num = 98
+		val n = 2
+		val result = multipleN(num, n)
+		Assert.assertEquals(1, result)
+	}
+
+	private fun multipleN(num: Int, n: Int): Int {
+		return if(num%n==0) 1 else 0
+	}
 
 	/**
 	 * 두 수의 연산값 비교하기
