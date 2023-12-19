@@ -12,6 +12,77 @@ import kotlin.math.*
 class CodingTestLevel0{
 
 	/**
+	 * 이어 붙인 수
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181928
+	 */
+	@Test
+	private fun concatenatedNumber(){
+		val num_list = intArrayOf(3, 4, 5, 2, 1)
+		val result = concatenatedNumber(num_list)
+		Assert.assertEquals(393, result)
+	}
+
+	private fun concatenatedNumber(num_list: IntArray): Int {
+		var odd = ""
+		var even = ""
+		num_list.forEach {
+			if(it%2==0){
+				even = "$even$it"
+			}else{
+				odd = "$odd$it"
+			}
+		}
+		return odd.toInt() + even.toInt()
+	}
+
+	/**
+	 * 원소들의 곱과 합
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181929
+	 */
+	@Test
+	fun multiplicationSumOfElements(){
+		val num_list = intArrayOf(5, 7, 8, 3)
+		val result = multiplicationSumOfElements(num_list)
+		Assert.assertEquals(0, result)
+	}
+
+	private fun multiplicationSumOfElements(num_list: IntArray): Int {
+		var multiplication = 1
+		num_list.forEach {
+			multiplication *= it
+		}
+		var sum = num_list.sum()
+		sum *= sum
+		return if(multiplication<sum){
+			1
+		}else{
+			0
+		}
+	}
+
+	/**
+	 * 특정한 문자를 대문자로 바꾸기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181873
+	 */
+	@Test
+	fun changeSpecificLettersToUppercase(){
+		val my_string = "programmers"
+		val alp = "p"
+		val result = changeSpecificLettersToUppercase(my_string, alp)
+		Assert.assertEquals("Programmers", result)
+	}
+
+	fun changeSpecificLettersToUppercase(my_string: String, alp: String): String {
+		return my_string.map {
+			if(it.toString() == alp){
+				 it.uppercase()
+			}else{
+				it
+			}
+		}.joinToString("")
+	}
+
+	/**
 	 * 주사위 게임 2
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/181930
 	 */
