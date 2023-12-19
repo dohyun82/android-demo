@@ -456,7 +456,7 @@ fun MediumTopAppBarExample(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CenterAlignedTopAppBarExample(){
+private fun CenterAlignedTopAppBarExample(){
 	val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
 	Scaffold(
@@ -502,7 +502,7 @@ fun CenterAlignedTopAppBarExample(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SmallTopAppBarExample(){
+private fun SmallTopAppBarExample(){
 	Scaffold(
 		topBar = {
 			TopAppBar(
@@ -573,7 +573,7 @@ fun ScrollContent(innerPadding: PaddingValues){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScaffoldExample(){
+private fun ScaffoldExample(){
 	var presses by remember { mutableIntStateOf(0)}
 	Scaffold(
 		topBar = {
