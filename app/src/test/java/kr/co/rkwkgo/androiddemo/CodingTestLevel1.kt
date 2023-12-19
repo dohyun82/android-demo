@@ -11,6 +11,279 @@ import kotlin.math.sqrt
 class CodingTestLevel1{
 
 	/**
+	 * 체육복
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/42862
+	 */
+	@Test
+	fun gymSuit(){
+		val n = 5
+		val lost = intArrayOf(4,2)
+		val reserve = intArrayOf(3, 5)
+		val result = gymSuit(n, lost, reserve)
+		Assert.assertEquals(5, result)
+	}
+
+	private fun gymSuit(n: Int, lost: IntArray, reserve: IntArray): Int {
+		val lostList = lost.sorted().toMutableList()
+		val reserveList = reserve.sorted().toMutableList().filter {
+			val result = lostList.contains(it)
+			if(result){
+				lostList.remove(it)
+			}
+			!result
+		}.toMutableList()
+		val count = lostList.count {
+			when{
+				reserveList.contains(it-1) -> {
+					reserveList.remove(it-1)
+					true
+				}
+				reserveList.contains(it) -> {
+					reserveList.remove(it)
+					true
+				}
+				reserveList.contains(it+1) -> {
+					reserveList.remove(it+1)
+					true
+				}
+				else -> false
+			}
+		}
+		return n - lostList.size + count
+	}
+
+	/**
+	 * 햄버거 만들기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/133502
+	 */
+	@Test
+	fun makingHamburgers(){
+		val ingredient = intArrayOf(1, 2, 3, 1, 1, 2, 3, 1)
+		val result = makingHamburgers(ingredient)
+		Assert.assertEquals(2, result)
+	}
+
+	private fun makingHamburgers(ingredient: IntArray): Int {
+		var count = 0
+		val sb = StringBuffer(ingredient.joinToString(""))
+		while(true){
+			var isMatching = false
+			val idx = sb.indexOf("1231")
+			if(idx!=-1){
+				sb.delete(idx, idx+4)
+				count++
+				isMatching = true
+			}
+			if(!isMatching){
+				break
+			}
+		}
+		return count
+	}
+
+	/**
+	 * 둘만의 암호
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/155652
+	 */
+	@Test
+	fun ourPassword(){
+		val s = "zzzz"
+		val skip = "abcd"
+		val index = 1
+		val result = ourPassword(s, skip, index)
+		Assert.assertEquals("eeee", result)
+	}
+
+	private fun ourPassword(s: String, skip: String, index: Int): String {
+		// 1. s 를 반복문 으로 돌림
+		// 2. char 값인 item 의 code 를 index 만큼 더하기
+		// 3. index 만큼 더할때 skip 에 속하는 문자 갯수 만큼 code 를 추가로 더하기
+		// 4. code 는 최소 'a' 97 최대 'z' 122
+		return s.map {
+			getSkipIndex(it, skip, index)
+		}.joinToString("")
+	}
+
+	private fun getSkipIndex(c: Char, skip: String, index: Int): Char{
+		var addIndex = 0
+		(c+1 ..  c + index).forEach {
+			var tempChar = it
+			if(tempChar.code>'z'.code){
+				tempChar -= 26
+			}
+			if(skip.contains(tempChar)){
+				addIndex++
+			}
+		}
+		return if(addIndex == 0){
+			var result = c.code + index
+			if(result>'z'.code){
+				result -= 26
+			}
+			result.toChar()
+		}else{
+			var result = c.code + index
+			if(result>'z'.code){
+				result -= 26
+			}
+			getSkipIndex(result.toChar(), skip, addIndex)
+		}
+	}
+
+
+	/**
+	 * 대충 만든 자판
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/160586
+	 */
+	@Test
+	fun roughlyMadeKeyboard(){
+		val keymap = arrayOf("ABACD", "BCEFD")
+		val targets = arrayOf("ABCD","AABB")
+		val result = roughlyMadeKeyboard(keymap, targets)
+		Assert.assertArrayEquals(intArrayOf(9,4), result)
+	}
+
+	private fun roughlyMadeKeyboard(keymap: Array<String>, targets: Array<String>): IntArray {
+		val resultList = mutableListOf<Int>()
+		// 1. targets 배열 길이 만큼 반복
+		for(target in targets){
+			var count = 0
+			// 2. target 의 인자 수 만큼 반복
+			for(idx in target.indices){
+				var resultIdx = 101
+				// 3. keymap 에서 target 의 인자로 최소 인덱스 구하기
+				for(key in keymap){
+					val tempIdx = key.indexOf(target[idx])
+					if(tempIdx != -1 && resultIdx>tempIdx){
+						resultIdx = tempIdx
+					}
+				}
+				if(resultIdx == 101){
+					count = 0
+					break
+				}else{
+					count += (resultIdx + 1)
+				}
+			}
+			if(count==0){
+				resultList.add(-1)
+			}else{
+				resultList.add(count)
+			}
+		}
+		return resultList.toIntArray()
+	}
+
+	/**
+	 * 문자열 나누기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/140108
+	 */
+	@Test
+	fun splitString(){
+		val s = "aaabbaccccabba"
+		val result = splitString(s)
+		Assert.assertEquals(3, result)
+	}
+
+	private fun splitString(s: String): Int {
+		// 1. s 의 첫 문자 분리
+		// 2. s 를 반복문에 돌림
+		// 3. s 의 첫문자와 같은 갯수와 다른 갯수가 같아지면 잘라내기
+		// 4. 잘라진 갯수 세서 리턴
+
+		var count = 0
+		var temp = s
+		while(temp.isNotEmpty()){
+			temp = splitString2(temp)
+			count++
+		}
+		return count
+	}
+
+	private fun splitString2(temp: String): String{
+		val char = temp.first()
+		var cnt1 = 0
+		var cnt2 = 0
+		var result = ""
+		for(idx in temp.indices) {
+			if(temp[idx] == char){
+				cnt1++
+			}else{
+				cnt2++
+			}
+			if(cnt1 == cnt2){
+				result = temp.substring(idx+1, temp.lastIndex+1)
+				break
+			}
+		}
+		return result
+	}
+
+	/**
+	 * 숫자 짝궁
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/131128
+	 */
+	@Test
+	fun numberPair(){
+		val x = "100"
+		val y = "123450"
+		val result = numberPair2(x, y)
+		Assert.assertEquals("10", result)
+	}
+
+	private fun numberPair2(x: String, y: String): String {
+		val ySb = StringBuffer(y)
+		val resultList = x.filter { c ->
+			val idx = ySb.indexOf(c)
+			if(idx != -1){
+				ySb.delete(idx, idx+1)
+				true
+			}else{
+				false
+			}
+		}.map { it.digitToInt() }
+		return if(resultList.isEmpty()){
+			"-1"
+		}else{
+			if(resultList.count{
+					it == 0
+				} == resultList.size){
+				"0"
+			}else{
+				resultList.sortedDescending().joinToString("")
+			}
+		}
+	}
+
+	private fun numberPair(x: String, y: String): String {
+		val xList = x.map {
+			it.digitToInt()
+		}
+		val yList = y.map {
+			it.digitToInt()
+		}.toMutableList()
+		val resultList = mutableListOf<Int>()
+		xList.forEach {
+			val idx = yList.indexOf(it)
+			if(idx != -1){
+				yList.removeAt(idx)
+				resultList.add(it)
+			}
+		}
+		return if(resultList.size==0){
+			"-1"
+		}else{
+			if(resultList.count{
+				it == 0
+			} == resultList.size){
+				"0"
+			}else{
+				resultList.sortedDescending().joinToString("")
+			}
+		}
+	}
+
+	/**
 	 * 로또의 최고 순위와 최저 순위
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/77484
 	 */

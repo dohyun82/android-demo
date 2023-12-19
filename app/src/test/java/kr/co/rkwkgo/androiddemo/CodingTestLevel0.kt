@@ -12,6 +12,50 @@ import kotlin.math.*
 class CodingTestLevel0{
 
 	/**
+	 * 주사위 게임 2
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181930
+	 */
+	@Test
+	fun diceGame2(){
+		val a = 2
+		val b = 6
+		val c = 1
+		val result = diceGame2(a, b, c)
+		Assert.assertEquals(9, result)
+	}
+
+	private fun diceGame2(a: Int, b: Int, c: Int): Int {
+		// 1. 세 숫자 비교
+		// 2. 모두 다르면 a + b + c
+		// 3. 두 숫자만 같으면 (a + b + c) * (a*a + b*b + c*c)
+		// 4. 세 숫자가 같으면 (a + b + c) * (a*a + b*b + c*c) * (a*a*a + b*b*b + c*c*c)
+		return if(a==b && b==c){
+			(a + b + c) * (a.toDouble().pow(2) + b.toDouble().pow(2) + c.toDouble().pow(2)).toInt() * (a.toDouble().pow(3) + b.toDouble().pow(3) + c.toDouble().pow(3)).toInt()
+		}else{
+			if(a==b || b==c || a==c){
+				(a + b + c) * (a.toDouble().pow(2) + b.toDouble().pow(2) + c.toDouble().pow(2)).toInt()
+			}else{
+				(a + b + c)
+			}
+		}
+	}
+
+	/**
+	 * 소문자로 바꾸기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181876
+	 */
+	@Test
+	fun lowercase(){
+		val myString = "aBcDeFg"
+		val result = lowercase(myString)
+		Assert.assertEquals("abcdefg", result)
+	}
+
+	fun lowercase(myString: String): String {
+		return myString.lowercase()
+	}
+
+	/**
 	 * 정수를 나선형으로 배치하기
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/181832
 	 */
