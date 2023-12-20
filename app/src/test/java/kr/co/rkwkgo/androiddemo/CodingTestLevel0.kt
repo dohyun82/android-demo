@@ -12,11 +12,63 @@ import kotlin.math.*
 class CodingTestLevel0{
 
 	/**
+	 * 수 조작하기 2
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181925
+	 */
+	@Test
+	fun manipulatingNumbers2(){
+		val numLog = intArrayOf(0, 1, 0, 10, 0, 1, 0, 10, 0, -1, -2, -1)
+		val result = manipulatingNumbers2(numLog)
+		Assert.assertEquals("wsdawsdassw", result)
+	}
+
+	private fun manipulatingNumbers2(numLog: IntArray): String {
+		val result = StringBuffer("")
+		for(idx in numLog.indices) {
+			if(idx != 0){
+				when(numLog[idx]- numLog[idx-1]){
+					1 -> result.append("w")
+					-1 -> result.append("s")
+					10 -> result.append("d")
+					-10 -> result.append("a")
+				}
+			}
+		}
+		return result.toString()
+	}
+
+	/**
+	 * 수 조작하기 1
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181926
+	 */
+	@Test
+	fun manipulatingNumbers1(){
+		val n = 0
+		val control = "wsdawsdassw"
+		val result = manipulatingNumbers1(n, control)
+		Assert.assertEquals(-1, result)
+	}
+
+	private fun manipulatingNumbers1(n: Int, control: String): Int {
+		var result = n
+		control.forEach {
+			when(it.toString()){
+				"w" -> result +=1
+				"s" -> result -=1
+				"d" -> result +=10
+				"a" -> result -=10
+				else -> {}
+			}
+		}
+		return result
+	}
+
+	/**
 	 * 이어 붙인 수
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/181928
 	 */
 	@Test
-	private fun concatenatedNumber(){
+	fun concatenatedNumber(){
 		val num_list = intArrayOf(3, 4, 5, 2, 1)
 		val result = concatenatedNumber(num_list)
 		Assert.assertEquals(393, result)
@@ -1863,8 +1915,7 @@ class CodingTestLevel0{
 	private fun changeIndex(my_string: String, num1: Int, num2: Int): String {
 		return my_string.toList().let {
 			Collections.swap(it, num1, num2)
-			it.joinToString("")
-		}
+			it.joinToString("") }
 	}
 
 }
