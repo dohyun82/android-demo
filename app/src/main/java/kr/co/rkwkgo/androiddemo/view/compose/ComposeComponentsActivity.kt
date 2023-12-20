@@ -14,29 +14,46 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.InputChip
+import androidx.compose.material3.InputChipDefaults
 import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SmallFloatingActionButton
+import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -95,8 +112,105 @@ private fun ComponentsBody(
 	Column(
 		modifier = modifier
 	) {
-		OutlinedCardExample()
+		ChipExample()
 	}
+}
+
+@Composable
+private fun ChipExample(){
+	Column {
+		AssistChipExample()
+		FilterChipExample()
+		InputChipExample("Input chip"){
+
+		}
+		SuggestionChipExample()
+	}
+}
+
+@Composable
+private fun SuggestionChipExample(){
+	SuggestionChip(onClick = {  }, label = { Text("Suggestion chip") })
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun InputChipExample(
+	text: String,
+	onDismiss: () -> Unit,
+){
+	var enabled by remember {
+		mutableStateOf(true)
+	}
+	if(!enabled) return
+
+	InputChip(
+		selected = enabled,
+		onClick = {
+			onDismiss()
+			enabled = !enabled
+				  },
+		label = { Text(text) },
+		avatar = {
+				 Icon(
+					 Icons.Filled.Person,
+					 contentDescription = null,
+					 Modifier.size(InputChipDefaults.AvatarSize)
+				 )
+		},
+		trailingIcon = {
+			Icon(
+				Icons.Default.Close,
+				contentDescription = null,
+				Modifier.size(
+					InputChipDefaults.AvatarSize
+				)
+			)
+		},
+	)
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun FilterChipExample(){
+	var selelected by remember {
+		mutableStateOf(false)
+	}
+	FilterChip(
+		selected = selelected,
+		onClick = {
+		  selelected = !selelected
+				  },
+		label = {
+			Text("Filter chip")
+		},
+		leadingIcon = if(selelected){
+			{
+				Icon(
+					imageVector = Icons.Filled.Done,
+					contentDescription = null,
+					modifier =  Modifier.size(FilterChipDefaults.IconSize)
+				)
+			}
+		}else{
+			null
+		}
+	)
+}
+
+@Composable
+private fun AssistChipExample(){
+	AssistChip(
+		onClick = { },
+		label = { Text("Assist chip") },
+		leadingIcon = {
+			Icon(
+				Icons.Filled.Settings,
+				contentDescription = null,
+				Modifier.size(AssistChipDefaults.IconSize)
+			)
+		}
+	)
 }
 
 @Composable
