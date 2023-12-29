@@ -12,6 +12,122 @@ import kotlin.math.*
 class CodingTestLevel0{
 
 	/**
+	 * 배열 만들기 4
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181918
+	 */
+	@Test
+	fun makeArray4(){
+		val arr = intArrayOf(1, 4, 2, 5, 3)
+		val result = makeArray4(arr)
+		Assert.assertArrayEquals(intArrayOf(1, 2, 3), result)
+	}
+
+	private fun makeArray4(arr: IntArray): IntArray {
+		val list = mutableListOf<Int>()
+		var i = 0
+		while(i < arr.size){
+			if(list.isEmpty()){
+				list.add(arr[i])
+				i++
+			}else{
+				if(arr[i] > list.last()){
+					list.add(arr[i])
+					i++
+				}else{
+					list.removeLast()
+				}
+			}
+		}
+		return list.toIntArray()
+	}
+
+	/**
+	 * 콜라츠 수열 만들기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181919
+	 */
+	@Test
+	fun creatingColatzSequence(){
+		val n = 10
+		val result = creatingColatzSequence(n)
+		Assert.assertArrayEquals(intArrayOf(10, 5, 16, 8, 4, 2, 1), result)
+	}
+
+	private fun creatingColatzSequence(n: Int): IntArray {
+		val list = mutableListOf<Int>()
+		var temp = n
+		list.add(temp)
+		while(temp!=1){
+			if(temp%2==0){
+				temp/=2
+			}else{
+				temp = (temp * 3) + 1
+			}
+			list.add(temp)
+		}
+		return list.toIntArray()
+	}
+
+	/**
+	 * 수열과 구간 쿼리 4
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181922
+	 */
+	@Test
+	fun sequenceIntervalQueries4(){
+		val arr = intArrayOf(0, 1, 2, 4, 3)
+		val queries = arrayOf(intArrayOf(0, 4, 1), intArrayOf(0, 3, 2), intArrayOf(0, 3, 3))
+		val result = sequenceIntervalQueries4(arr, queries)
+		Assert.assertArrayEquals(intArrayOf(3, 2, 4, 6, 4), result)
+	}
+
+	private fun sequenceIntervalQueries4(arr: IntArray, queries: Array<IntArray>): IntArray {
+		for(query in queries){
+			(query[0]..query[1]).forEachIndexed { index, i ->
+				if(i%query[2]==0){
+					arr[index]++
+				}
+			}
+		}
+		return arr
+	}
+
+	/**
+	 * 수열과 구간 쿼리 3
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181924
+	 */
+	@Test
+	fun sequenceIntervalQueries3(){
+		val arr = intArrayOf(0, 1, 2, 3, 4)
+		val queries = arrayOf(intArrayOf(0,3), intArrayOf(1,2), intArrayOf(1,4))
+		val result = sequenceIntervalQueries3(arr, queries)
+		Assert.assertArrayEquals(intArrayOf(3, 4, 1, 0, 2), result)
+	}
+
+	private fun sequenceIntervalQueries3(arr: IntArray, queries: Array<IntArray>): IntArray {
+		for(query in queries){
+			val temp = arr[query.first()]
+			arr[query.first()] = arr[query.last()]
+			arr[query.last()] = temp
+		}
+		return arr
+	}
+
+	/**
+	 * 문자열의 앞의 n글자
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181907
+	 */
+	@Test
+	fun lettersFrontString(){
+		val my_string = "ProgrammerS123"
+		val n = 11
+		val result = lettersFrontString(my_string, n)
+		Assert.assertEquals("ProgrammerS", result)
+	}
+
+	private fun lettersFrontString(my_string: String, n: Int): String {
+		return my_string.substring(0, n)
+	}
+
+	/**
 	 * 수 조작하기 2
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/181925
 	 */
