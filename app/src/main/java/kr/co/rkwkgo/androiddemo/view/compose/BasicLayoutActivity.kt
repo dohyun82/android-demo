@@ -34,7 +34,7 @@ class BasicLayoutActivity : ComponentActivity() {
 }
 
 @Composable
-fun ArtistCard(){
+private fun ArtistCard(){
 	Row(
 		modifier = Modifier.size(
 			width = 400.dp,
