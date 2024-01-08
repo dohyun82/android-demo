@@ -12,6 +12,289 @@ import kotlin.math.*
 class CodingTestLevel0{
 
 	/**
+	 * 배열 만들기 4
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181918
+	 */
+	@Test
+	fun makeArray4(){
+		val arr = intArrayOf(1, 4, 2, 5, 3)
+		val result = makeArray4(arr)
+		Assert.assertArrayEquals(intArrayOf(1, 2, 3), result)
+	}
+
+	private fun makeArray4(arr: IntArray): IntArray {
+		val list = mutableListOf<Int>()
+		var i = 0
+		while(i < arr.size){
+			if(list.isEmpty()){
+				list.add(arr[i])
+				i++
+			}else{
+				if(arr[i] > list.last()){
+					list.add(arr[i])
+					i++
+				}else{
+					list.removeLast()
+				}
+			}
+		}
+		return list.toIntArray()
+	}
+
+	/**
+	 * 콜라츠 수열 만들기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181919
+	 */
+	@Test
+	fun creatingColatzSequence(){
+		val n = 10
+		val result = creatingColatzSequence(n)
+		Assert.assertArrayEquals(intArrayOf(10, 5, 16, 8, 4, 2, 1), result)
+	}
+
+	private fun creatingColatzSequence(n: Int): IntArray {
+		val list = mutableListOf<Int>()
+		var temp = n
+		list.add(temp)
+		while(temp!=1){
+			if(temp%2==0){
+				temp/=2
+			}else{
+				temp = (temp * 3) + 1
+			}
+			list.add(temp)
+		}
+		return list.toIntArray()
+	}
+
+	/**
+	 * 수열과 구간 쿼리 4
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181922
+	 */
+	@Test
+	fun sequenceIntervalQueries4(){
+		val arr = intArrayOf(0, 1, 2, 4, 3)
+		val queries = arrayOf(intArrayOf(0, 4, 1), intArrayOf(0, 3, 2), intArrayOf(0, 3, 3))
+		val result = sequenceIntervalQueries4(arr, queries)
+		Assert.assertArrayEquals(intArrayOf(3, 2, 4, 6, 4), result)
+	}
+
+	private fun sequenceIntervalQueries4(arr: IntArray, queries: Array<IntArray>): IntArray {
+		for(query in queries){
+			(query[0]..query[1]).forEachIndexed { index, i ->
+				if(i%query[2]==0){
+					arr[index]++
+				}
+			}
+		}
+		return arr
+	}
+
+	/**
+	 * 수열과 구간 쿼리 3
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181924
+	 */
+	@Test
+	fun sequenceIntervalQueries3(){
+		val arr = intArrayOf(0, 1, 2, 3, 4)
+		val queries = arrayOf(intArrayOf(0,3), intArrayOf(1,2), intArrayOf(1,4))
+		val result = sequenceIntervalQueries3(arr, queries)
+		Assert.assertArrayEquals(intArrayOf(3, 4, 1, 0, 2), result)
+	}
+
+	private fun sequenceIntervalQueries3(arr: IntArray, queries: Array<IntArray>): IntArray {
+		for(query in queries){
+			val temp = arr[query.first()]
+			arr[query.first()] = arr[query.last()]
+			arr[query.last()] = temp
+		}
+		return arr
+	}
+
+	/**
+	 * 문자열의 앞의 n글자
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181907
+	 */
+	@Test
+	fun lettersFrontString(){
+		val my_string = "ProgrammerS123"
+		val n = 11
+		val result = lettersFrontString(my_string, n)
+		Assert.assertEquals("ProgrammerS", result)
+	}
+
+	private fun lettersFrontString(my_string: String, n: Int): String {
+		return my_string.substring(0, n)
+	}
+
+	/**
+	 * 수 조작하기 2
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181925
+	 */
+	@Test
+	fun manipulatingNumbers2(){
+		val numLog = intArrayOf(0, 1, 0, 10, 0, 1, 0, 10, 0, -1, -2, -1)
+		val result = manipulatingNumbers2(numLog)
+		Assert.assertEquals("wsdawsdassw", result)
+	}
+
+	private fun manipulatingNumbers2(numLog: IntArray): String {
+		val result = StringBuffer("")
+		for(idx in numLog.indices) {
+			if(idx != 0){
+				when(numLog[idx]- numLog[idx-1]){
+					1 -> result.append("w")
+					-1 -> result.append("s")
+					10 -> result.append("d")
+					-10 -> result.append("a")
+				}
+			}
+		}
+		return result.toString()
+	}
+
+	/**
+	 * 수 조작하기 1
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181926
+	 */
+	@Test
+	fun manipulatingNumbers1(){
+		val n = 0
+		val control = "wsdawsdassw"
+		val result = manipulatingNumbers1(n, control)
+		Assert.assertEquals(-1, result)
+	}
+
+	private fun manipulatingNumbers1(n: Int, control: String): Int {
+		var result = n
+		control.forEach {
+			when(it.toString()){
+				"w" -> result +=1
+				"s" -> result -=1
+				"d" -> result +=10
+				"a" -> result -=10
+				else -> {}
+			}
+		}
+		return result
+	}
+
+	/**
+	 * 이어 붙인 수
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181928
+	 */
+	@Test
+	fun concatenatedNumber(){
+		val num_list = intArrayOf(3, 4, 5, 2, 1)
+		val result = concatenatedNumber(num_list)
+		Assert.assertEquals(393, result)
+	}
+
+	private fun concatenatedNumber(num_list: IntArray): Int {
+		var odd = ""
+		var even = ""
+		num_list.forEach {
+			if(it%2==0){
+				even = "$even$it"
+			}else{
+				odd = "$odd$it"
+			}
+		}
+		return odd.toInt() + even.toInt()
+	}
+
+	/**
+	 * 원소들의 곱과 합
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181929
+	 */
+	@Test
+	fun multiplicationSumOfElements(){
+		val num_list = intArrayOf(5, 7, 8, 3)
+		val result = multiplicationSumOfElements(num_list)
+		Assert.assertEquals(0, result)
+	}
+
+	private fun multiplicationSumOfElements(num_list: IntArray): Int {
+		var multiplication = 1
+		num_list.forEach {
+			multiplication *= it
+		}
+		var sum = num_list.sum()
+		sum *= sum
+		return if(multiplication<sum){
+			1
+		}else{
+			0
+		}
+	}
+
+	/**
+	 * 특정한 문자를 대문자로 바꾸기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181873
+	 */
+	@Test
+	fun changeSpecificLettersToUppercase(){
+		val my_string = "programmers"
+		val alp = "p"
+		val result = changeSpecificLettersToUppercase(my_string, alp)
+		Assert.assertEquals("Programmers", result)
+	}
+
+	fun changeSpecificLettersToUppercase(my_string: String, alp: String): String {
+		return my_string.map {
+			if(it.toString() == alp){
+				 it.uppercase()
+			}else{
+				it
+			}
+		}.joinToString("")
+	}
+
+	/**
+	 * 주사위 게임 2
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181930
+	 */
+	@Test
+	fun diceGame2(){
+		val a = 2
+		val b = 6
+		val c = 1
+		val result = diceGame2(a, b, c)
+		Assert.assertEquals(9, result)
+	}
+
+	private fun diceGame2(a: Int, b: Int, c: Int): Int {
+		// 1. 세 숫자 비교
+		// 2. 모두 다르면 a + b + c
+		// 3. 두 숫자만 같으면 (a + b + c) * (a*a + b*b + c*c)
+		// 4. 세 숫자가 같으면 (a + b + c) * (a*a + b*b + c*c) * (a*a*a + b*b*b + c*c*c)
+		return if(a==b && b==c){
+			(a + b + c) * (a.toDouble().pow(2) + b.toDouble().pow(2) + c.toDouble().pow(2)).toInt() * (a.toDouble().pow(3) + b.toDouble().pow(3) + c.toDouble().pow(3)).toInt()
+		}else{
+			if(a==b || b==c || a==c){
+				(a + b + c) * (a.toDouble().pow(2) + b.toDouble().pow(2) + c.toDouble().pow(2)).toInt()
+			}else{
+				(a + b + c)
+			}
+		}
+	}
+
+	/**
+	 * 소문자로 바꾸기
+	 * https://school.programmers.co.kr/learn/courses/30/lessons/181876
+	 */
+	@Test
+	fun lowercase(){
+		val myString = "aBcDeFg"
+		val result = lowercase(myString)
+		Assert.assertEquals("abcdefg", result)
+	}
+
+	fun lowercase(myString: String): String {
+		return myString.lowercase()
+	}
+
+	/**
 	 * 정수를 나선형으로 배치하기
 	 * https://school.programmers.co.kr/learn/courses/30/lessons/181832
 	 */
@@ -1748,8 +2031,7 @@ class CodingTestLevel0{
 	private fun changeIndex(my_string: String, num1: Int, num2: Int): String {
 		return my_string.toList().let {
 			Collections.swap(it, num1, num2)
-			it.joinToString("")
-		}
+			it.joinToString("") }
 	}
 
 }
