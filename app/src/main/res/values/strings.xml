@@ -36,4 +36,5 @@
     <string name="title_activity_compose_lifecycle">ComposeLifecycleActivity</string>
     <string name="title_activity_compose_components">ComposeComponentsActivity</string>
     <string name="title_activity_compose_layout">ComposeLayoutActivity</string>
+    <string name="title_activity_compose_pager">ComposePagerActivity</string>
 </resources>

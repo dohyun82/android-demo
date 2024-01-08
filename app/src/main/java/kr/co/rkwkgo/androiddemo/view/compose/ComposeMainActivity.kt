@@ -59,6 +59,9 @@ class ComposeMainActivity : ComponentActivity() {
 						ComposeFeature.Layout -> {
 							startActivity(Intent(this@ComposeMainActivity, ComposeLayoutActivity::class.java))
 						}
+						ComposeFeature.Pager -> {
+							startActivity(Intent(this@ComposeMainActivity, ComposePagerActivity::class.java))
+						}
 					}
 				}
 			}
@@ -124,6 +127,11 @@ fun ComposeMainLayout(onClick : (type: ComposeFeature)-> Unit){
 			}) {
 				Text(text = ComposeFeature.Layout.name)
 			}
+			Button(onClick = {
+				onClick(ComposeFeature.Pager)
+			}) {
+				Text(text = ComposeFeature.Pager.name)
+			}
 		}
 	}
 }
@@ -145,4 +153,5 @@ enum class ComposeFeature{
 	Components,
 	Animation,
 	Layout,
+	Pager,
 }
